@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ConferenceHallModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ConferenceHall.dbo.ConferenceRoomMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ConferenceRoomMaster">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomName" Type="varchar" MaxLength="250" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="PlantID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ConferenceHall.dbo.DepartmentMaster' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DepartmentMaster">
+          <Property Name="DepartmentID" Type="int" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="250" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="PlantID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>-->
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="256" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" Nullable="false" />
+          <Property Name="SourceId" Type="varchar" MaxLength="25" />
+          <Property Name="TargetId" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="EventsDatas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="nvarchar(max)" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EventsScheduler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="256" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ConferenceHall.dbo.NewEventsData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="NewEventsData">
+          <Key>
+            <PropertyRef Name="EventID" />
+            <PropertyRef Name="Eve_Subject" />
+            <PropertyRef Name="Eve_start" />
+            <PropertyRef Name="Eve_IsFullDay" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Eve_Subject" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Eve_Description" Type="nvarchar(max)" />
+          <Property Name="Eve_start" Type="datetime" Nullable="false" />
+          <Property Name="Eve_EndDate" Type="datetime" />
+          <Property Name="Eve_ThemeColor" Type="nvarchar" MaxLength="10" />
+          <Property Name="Eve_IsFullDay" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ConferenceHall.dbo.PlantMaster' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PlantMaster">
+          <Property Name="PlantID" Type="int" />
+          <Property Name="PlantName" Type="varchar" MaxLength="250" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ConferenceHall.dbo.sara' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="sara">
+          <Property Name="id" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="250" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ConferenceHall.dbo.UnitMaster' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="UnitMaster">
+          <Property Name="UnitID" Type="int" />
+          <Property Name="UnitName" Type="varchar" MaxLength="250" />
+          <Property Name="PlantID" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ConferenceHall.dbo.UserLogin' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="UserLogin">
+          <Property Name="UserLoginID" Type="int" />
+          <Property Name="EmployeeUserID" Type="int" />
+          <Property Name="LoginPassword" Type="varchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDateTime" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedDateTime" Type="int" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="UserType" Type="varchar" MaxLength="250" />
+        </EntityType>-->
+        <EntityContainer Name="ConferenceHallModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventsDatas" EntityType="Self.EventsDatas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventsScheduler" EntityType="Self.EventsScheduler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConferenceRoomMaster" EntityType="Self.ConferenceRoomMaster" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ConferenceRoomMaster].[RoomID] AS [RoomID], 
+    [ConferenceRoomMaster].[RoomName] AS [RoomName], 
+    [ConferenceRoomMaster].[UnitID] AS [UnitID], 
+    [ConferenceRoomMaster].[PlantID] AS [PlantID], 
+    [ConferenceRoomMaster].[IsActive] AS [IsActive]
+    FROM [dbo].[ConferenceRoomMaster] AS [ConferenceRoomMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="NewEventsData" EntityType="Self.NewEventsData" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NewEventsData].[EventID] AS [EventID], 
+    [NewEventsData].[Eve_Subject] AS [Eve_Subject], 
+    [NewEventsData].[Eve_Description] AS [Eve_Description], 
+    [NewEventsData].[Eve_start] AS [Eve_start], 
+    [NewEventsData].[Eve_EndDate] AS [Eve_EndDate], 
+    [NewEventsData].[Eve_ThemeColor] AS [Eve_ThemeColor], 
+    [NewEventsData].[Eve_IsFullDay] AS [Eve_IsFullDay]
+    FROM [dbo].[NewEventsData] AS [NewEventsData]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ConferenceHallModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SourceId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="TargetId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EventsData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="EventsScheduler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ConferenceRoomMaster">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="PlantID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="NewEventsData">
+          <Key>
+            <PropertyRef Name="EventID" />
+            <PropertyRef Name="Eve_Subject" />
+            <PropertyRef Name="Eve_start" />
+            <PropertyRef Name="Eve_IsFullDay" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Eve_Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Eve_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Eve_start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Eve_EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Eve_ThemeColor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Eve_IsFullDay" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ConferenceHallEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="EventsDatas" EntityType="Self.EventsData" />
+          <EntitySet Name="EventsSchedulers" EntityType="Self.EventsScheduler" />
+          <EntitySet Name="ConferenceRoomMasters" EntityType="Self.ConferenceRoomMaster" />
+          <EntitySet Name="NewEventsDatas" EntityType="Self.NewEventsData" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ConferenceHallModelStoreContainer" CdmEntityContainer="ConferenceHallEntities3">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="ConferenceHallModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="ConferenceHallModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventsDatas">
+            <EntityTypeMapping TypeName="ConferenceHallModel.EventsData">
+              <MappingFragment StoreEntitySet="EventsDatas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventsSchedulers">
+            <EntityTypeMapping TypeName="ConferenceHallModel.EventsScheduler">
+              <MappingFragment StoreEntitySet="EventsScheduler">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConferenceRoomMasters">
+            <EntityTypeMapping TypeName="ConferenceHallModel.ConferenceRoomMaster">
+              <MappingFragment StoreEntitySet="ConferenceRoomMaster">
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewEventsDatas">
+            <EntityTypeMapping TypeName="ConferenceHallModel.NewEventsData">
+              <MappingFragment StoreEntitySet="NewEventsData">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="Eve_Subject" ColumnName="Eve_Subject" />
+                <ScalarProperty Name="Eve_Description" ColumnName="Eve_Description" />
+                <ScalarProperty Name="Eve_start" ColumnName="Eve_start" />
+                <ScalarProperty Name="Eve_EndDate" ColumnName="Eve_EndDate" />
+                <ScalarProperty Name="Eve_ThemeColor" ColumnName="Eve_ThemeColor" />
+                <ScalarProperty Name="Eve_IsFullDay" ColumnName="Eve_IsFullDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
