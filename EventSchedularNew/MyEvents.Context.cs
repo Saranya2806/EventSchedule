@@ -31,5 +31,8 @@ namespace EventSchedularNew
         public virtual DbSet<EventsScheduler> EventsSchedulers { get; set; }
         public virtual DbSet<ConferenceRoomMaster> ConferenceRoomMasters { get; set; }
         public virtual DbSet<NewEventsData> NewEventsDatas { get; set; }
+        public virtual DbSet<PlantMaster> PlantMasters { get; set; }
+        public virtual DbSet<UnitMaster> UnitMasters { get; set; }
+        public virtual DbSet<UserLogin> UserLogins { get; set; }
     }
 }

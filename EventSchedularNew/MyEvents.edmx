@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ConferenceHallModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ConferenceHallModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -41,9 +41,13 @@ warning 6013: The table/view 'ConferenceHall.dbo.DepartmentMaster' does not have
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="text" Type="nvarchar" MaxLength="256" />
           <Property Name="start_date" Type="datetime" Nullable="false" />
-          <Property Name="end_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" />
           <Property Name="SourceId" Type="varchar" MaxLength="25" />
           <Property Name="TargetId" Type="varchar" MaxLength="25" />
+          <Property Name="subject" Type="varchar" MaxLength="250" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="IsFullDay" Type="bit" />
+          <Property Name="Themecolor" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="EventsDatas">
           <Key>
@@ -80,30 +84,27 @@ warning 6002: The table/view 'ConferenceHall.dbo.NewEventsData' does not have a 
           <Property Name="Eve_ThemeColor" Type="nvarchar" MaxLength="10" />
           <Property Name="Eve_IsFullDay" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'ConferenceHall.dbo.PlantMaster' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="PlantMaster">
-          <Property Name="PlantID" Type="int" />
+          <Key>
+            <PropertyRef Name="PlantID" />
+          </Key>
+          <Property Name="PlantID" Type="int" Nullable="false" />
           <Property Name="PlantName" Type="varchar" MaxLength="250" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'ConferenceHall.dbo.sara' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="sara">
-          <Property Name="id" Type="int" />
-          <Property Name="name" Type="varchar" MaxLength="250" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'ConferenceHall.dbo.UnitMaster' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        </EntityType>
         <EntityType Name="UnitMaster">
-          <Property Name="UnitID" Type="int" />
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="int" Nullable="false" />
           <Property Name="UnitName" Type="varchar" MaxLength="250" />
           <Property Name="PlantID" Type="int" />
           <Property Name="isActive" Type="bit" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'ConferenceHall.dbo.UserLogin' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        </EntityType>
         <EntityType Name="UserLogin">
-          <Property Name="UserLoginID" Type="int" />
+          <Key>
+            <PropertyRef Name="UserLoginID" />
+          </Key>
+          <Property Name="UserLoginID" Type="int" Nullable="false" />
           <Property Name="EmployeeUserID" Type="int" />
           <Property Name="LoginPassword" Type="varchar" MaxLength="250" />
           <Property Name="CreatedBy" Type="int" />
@@ -112,12 +113,15 @@ warning 6013: The table/view 'ConferenceHall.dbo.UserLogin' does not have a prim
           <Property Name="UpdatedDateTime" Type="int" />
           <Property Name="isActive" Type="bit" />
           <Property Name="UserType" Type="varchar" MaxLength="250" />
-        </EntityType>-->
+        </EntityType>
         <EntityContainer Name="ConferenceHallModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventsDatas" EntityType="Self.EventsDatas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventsScheduler" EntityType="Self.EventsScheduler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlantMaster" EntityType="Self.PlantMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitMaster" EntityType="Self.UnitMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLogin" EntityType="Self.UserLogin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConferenceRoomMaster" EntityType="Self.ConferenceRoomMaster" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ConferenceRoomMaster].[RoomID] AS [RoomID], 
@@ -139,8 +143,7 @@ warning 6013: The table/view 'ConferenceHall.dbo.UserLogin' does not have a prim
     FROM [dbo].[NewEventsData] AS [NewEventsData]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ConferenceHallModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -159,9 +162,13 @@ warning 6013: The table/view 'ConferenceHall.dbo.UserLogin' does not have a prim
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="text" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Precision="3" />
           <Property Name="SourceId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="TargetId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="subject" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsFullDay" Type="Boolean" />
+          <Property Name="Themecolor" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EventsData">
           <Key>
@@ -213,7 +220,40 @@ warning 6013: The table/view 'ConferenceHall.dbo.UserLogin' does not have a prim
           <EntitySet Name="EventsSchedulers" EntityType="Self.EventsScheduler" />
           <EntitySet Name="ConferenceRoomMasters" EntityType="Self.ConferenceRoomMaster" />
           <EntitySet Name="NewEventsDatas" EntityType="Self.NewEventsData" />
+          <EntitySet Name="PlantMasters" EntityType="ConferenceHallModel.PlantMaster" />
+          <EntitySet Name="UnitMasters" EntityType="ConferenceHallModel.UnitMaster" />
+          <EntitySet Name="UserLogins" EntityType="ConferenceHallModel.UserLogin" />
         </EntityContainer>
+        <EntityType Name="PlantMaster">
+          <Key>
+            <PropertyRef Name="PlantID" />
+          </Key>
+          <Property Name="PlantID" Type="Int32" Nullable="false" />
+          <Property Name="PlantName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UnitMaster">
+          <Key>
+            <PropertyRef Name="UnitID" />
+          </Key>
+          <Property Name="UnitID" Type="Int32" Nullable="false" />
+          <Property Name="UnitName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PlantID" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="UserLogin">
+          <Key>
+            <PropertyRef Name="UserLoginID" />
+          </Key>
+          <Property Name="UserLoginID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeUserID" Type="Int32" />
+          <Property Name="LoginPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDateTime" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedDateTime" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="UserType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -232,6 +272,10 @@ warning 6013: The table/view 'ConferenceHall.dbo.UserLogin' does not have a prim
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="ConferenceHallModel.Event">
               <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="Themecolor" ColumnName="Themecolor" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="text" ColumnName="text" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
@@ -282,6 +326,39 @@ warning 6013: The table/view 'ConferenceHall.dbo.UserLogin' does not have a prim
                 <ScalarProperty Name="Eve_EndDate" ColumnName="Eve_EndDate" />
                 <ScalarProperty Name="Eve_ThemeColor" ColumnName="Eve_ThemeColor" />
                 <ScalarProperty Name="Eve_IsFullDay" ColumnName="Eve_IsFullDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlantMasters">
+            <EntityTypeMapping TypeName="ConferenceHallModel.PlantMaster">
+              <MappingFragment StoreEntitySet="PlantMaster">
+                <ScalarProperty Name="PlantName" ColumnName="PlantName" />
+                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitMasters">
+            <EntityTypeMapping TypeName="ConferenceHallModel.UnitMaster">
+              <MappingFragment StoreEntitySet="UnitMaster">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogins">
+            <EntityTypeMapping TypeName="ConferenceHallModel.UserLogin">
+              <MappingFragment StoreEntitySet="UserLogin">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="UpdatedDateTime" ColumnName="UpdatedDateTime" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LoginPassword" ColumnName="LoginPassword" />
+                <ScalarProperty Name="EmployeeUserID" ColumnName="EmployeeUserID" />
+                <ScalarProperty Name="UserLoginID" ColumnName="UserLoginID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

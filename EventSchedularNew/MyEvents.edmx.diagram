@@ -11,6 +11,9 @@
         <EntityTypeShape EntityType="ConferenceHallModel.EventsScheduler" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ConferenceHallModel.ConferenceRoomMaster" Width="1.375" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ConferenceHallModel.NewEventsData" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConferenceHallModel.PlantMaster" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ConferenceHallModel.UnitMaster" Width="1.5" PointX="5.375" PointY="6.875" />
+        <EntityTypeShape EntityType="ConferenceHallModel.UserLogin" Width="1.5" PointX="3.125" PointY="6.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Userlogin";
+}
+
+<h2>Userlogin</h2>
+<html>
+<body>
+    <div>
+        .
+
+        <div id="loginForm">
+            <div style="margin-top: 3%; margin-bottom:25%;padding-bottom:5%;">
+                <div style="color:white;">
+                    @*<div class="col-md-10" style="text-align:right">
+                        <span style="font-size:xx-large;color:lime;">User Login</span>
+                    </div>*@
+                    <div class="col-md-12" style="margin-left:-10%">
+                        <div class="col-md-12" style="padding:1%">
+                            <span class="col-md-9" style="text-align:right">
+                                <label style="color: lime;font-size:larger;">Employee ID : </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="number" id="empID" placeholder="Enter Employee ID" class="form-control" onkeypress="return isNumberKey(event)" style="width:100%" />
+                            </span>
+                        </div>
+                        <div class="col-md-12" style="padding:1.5%;margin-bottom:1%;">
+                            <span class="col-md-9" style="text-align:right">
+                                <label style="color: lime; font-size: larger; ">Password : </label>
+                            </span>
+                            <span class="col-md-3">
+                                <input type="password" id="psw" placeholder="Enter Password" class="form-control" style="width:100%" />
+                            </span>
+                        </div>
+                        <div class="col-md-11" style="text-align:right;padding-left:13%">
+                            <button type="submit" class="btn btn-success" id="btnLogin" onclick="getLogin()">Login</button>
+                            <button type="reset" class="btn btn-warning" id="btnReset" onclick="clearData()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+

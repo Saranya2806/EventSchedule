@@ -12,17 +12,16 @@ namespace EventSchedularNew
     using System;
     using System.Collections.Generic;
     
-    public partial class Event
+    public partial class UserLogin
     {
-        public int id { get; set; }
-        public string text { get; set; }
-        public System.DateTime start_date { get; set; }
-        public Nullable<System.DateTime> end_date { get; set; }
-        public string SourceId { get; set; }
-        public string TargetId { get; set; }
-        public string subject { get; set; }
-        public string Description { get; set; }
-        public Nullable<bool> IsFullDay { get; set; }
-        public string Themecolor { get; set; }
+        public int UserLoginID { get; set; }
+        public Nullable<int> EmployeeUserID { get; set; }
+        public string LoginPassword { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<int> CreatedDateTime { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
+        public Nullable<int> UpdatedDateTime { get; set; }
+        public Nullable<bool> isActive { get; set; }
+        public string UserType { get; set; }
     }
 }
