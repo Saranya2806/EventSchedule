@@ -97,7 +97,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Online Booking</h2>
+<div>
+    <span>@ViewData["empID"]</span>
+    <span>@ViewData["empName"]</span>
+</div>
 <div id="calender"></div>
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -193,6 +197,7 @@
     .modal-body {
         padding-left: 20% !important;
     }
+   
 </style>
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
