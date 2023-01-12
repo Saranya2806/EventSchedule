@@ -25,15 +25,49 @@ warning 6002: The table/view 'ConferenceHall.dbo.ConferenceRoomMaster' does not 
           <Property Name="PlantID" Type="int" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'ConferenceHall.dbo.DepartmentMaster' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="DepartmentMaster">
-          <Property Name="DepartmentID" Type="int" />
+          <Key>
+            <PropertyRef Name="SNO" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
           <Property Name="DepartmentName" Type="varchar" MaxLength="250" />
           <Property Name="UnitID" Type="int" />
           <Property Name="PlantID" Type="int" />
           <Property Name="IsActive" Type="bit" />
-        </EntityType>-->
+          <Property Name="SNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DesignationMaster">
+          <Key>
+            <PropertyRef Name="DesignationID" />
+          </Key>
+          <Property Name="DesignationID" Type="int" Nullable="false" />
+          <Property Name="DesignationName" Type="varchar" MaxLength="125" />
+        </EntityType>
+        <EntityType Name="EmployeeMaster">
+          <Key>
+            <PropertyRef Name="SNO" />
+          </Key>
+          <Property Name="EMPLOYEEID" Type="int" Nullable="false" />
+          <Property Name="EMPLOYEENAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="DOB" Type="nvarchar" MaxLength="255" />
+          <Property Name="DOJ" Type="nvarchar" MaxLength="255" />
+          <Property Name="GENDER" Type="nvarchar" MaxLength="255" />
+          <Property Name="CATEGORY_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="DESIGNATION_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="DEPARTMENT_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="EMAIL_ID" Type="nvarchar" MaxLength="255" />
+          <Property Name="UNIT" Type="nvarchar" MaxLength="255" />
+          <Property Name="REPORTING_MANAGER_ID" Type="float" />
+          <Property Name="REPORTING_MANAGER_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="REPORTING_MANAGER_EMAILID" Type="nvarchar" MaxLength="255" />
+          <Property Name="DpartMentID" Type="int" />
+          <Property Name="RFID" Type="varchar" MaxLength="25" />
+          <Property Name="DesignationID" Type="int" />
+          <Property Name="Isactive" Type="bit" />
+          <Property Name="Employee_Contract" Type="varchar" MaxLength="120" />
+          <Property Name="EmployeeMode" Type="varchar" MaxLength="125" />
+          <Property Name="SNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="Events">
           <Key>
             <PropertyRef Name="id" />
@@ -116,6 +150,9 @@ warning 6002: The table/view 'ConferenceHall.dbo.NewEventsData' does not have a 
         </EntityType>
         <EntityContainer Name="ConferenceHallModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepartmentMaster" EntityType="Self.DepartmentMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DesignationMaster" EntityType="Self.DesignationMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeMaster" EntityType="Self.EmployeeMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventsDatas" EntityType="Self.EventsDatas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventsScheduler" EntityType="Self.EventsScheduler" Schema="dbo" store:Type="Tables" />
@@ -223,6 +260,9 @@ warning 6002: The table/view 'ConferenceHall.dbo.NewEventsData' does not have a 
           <EntitySet Name="PlantMasters" EntityType="ConferenceHallModel.PlantMaster" />
           <EntitySet Name="UnitMasters" EntityType="ConferenceHallModel.UnitMaster" />
           <EntitySet Name="UserLogins" EntityType="ConferenceHallModel.UserLogin" />
+          <EntitySet Name="DepartmentMasters" EntityType="ConferenceHallModel.DepartmentMaster" />
+          <EntitySet Name="EmployeeMasters" EntityType="ConferenceHallModel.EmployeeMaster" />
+          <EntitySet Name="DesignationMasters" EntityType="ConferenceHallModel.DesignationMaster" />
         </EntityContainer>
         <EntityType Name="PlantMaster">
           <Key>
@@ -253,6 +293,49 @@ warning 6002: The table/view 'ConferenceHall.dbo.NewEventsData' does not have a 
           <Property Name="UpdatedDateTime" Type="Int32" />
           <Property Name="isActive" Type="Boolean" />
           <Property Name="UserType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DepartmentMaster">
+          <Key>
+            <PropertyRef Name="SNO" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="PlantID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="SNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="EmployeeMaster">
+          <Key>
+            <PropertyRef Name="SNO" />
+          </Key>
+          <Property Name="EMPLOYEEID" Type="Int32" Nullable="false" />
+          <Property Name="EMPLOYEENAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DOJ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="GENDER" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CATEGORY_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DESIGNATION_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DEPARTMENT_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UNIT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="REPORTING_MANAGER_ID" Type="Double" />
+          <Property Name="REPORTING_MANAGER_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="REPORTING_MANAGER_EMAILID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DpartMentID" Type="Int32" />
+          <Property Name="RFID" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="DesignationID" Type="Int32" />
+          <Property Name="Isactive" Type="Boolean" />
+          <Property Name="Employee_Contract" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeMode" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
+          <Property Name="SNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="DesignationMaster">
+          <Key>
+            <PropertyRef Name="DesignationID" />
+          </Key>
+          <Property Name="DesignationID" Type="Int32" Nullable="false" />
+          <Property Name="DesignationName" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -359,6 +442,52 @@ warning 6002: The table/view 'ConferenceHall.dbo.NewEventsData' does not have a 
                 <ScalarProperty Name="LoginPassword" ColumnName="LoginPassword" />
                 <ScalarProperty Name="EmployeeUserID" ColumnName="EmployeeUserID" />
                 <ScalarProperty Name="UserLoginID" ColumnName="UserLoginID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentMasters">
+            <EntityTypeMapping TypeName="ConferenceHallModel.DepartmentMaster">
+              <MappingFragment StoreEntitySet="DepartmentMaster">
+                <ScalarProperty Name="SNO" ColumnName="SNO" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeMasters">
+            <EntityTypeMapping TypeName="ConferenceHallModel.EmployeeMaster">
+              <MappingFragment StoreEntitySet="EmployeeMaster">
+                <ScalarProperty Name="SNO" ColumnName="SNO" />
+                <ScalarProperty Name="EmployeeMode" ColumnName="EmployeeMode" />
+                <ScalarProperty Name="Employee_Contract" ColumnName="Employee_Contract" />
+                <ScalarProperty Name="Isactive" ColumnName="Isactive" />
+                <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+                <ScalarProperty Name="RFID" ColumnName="RFID" />
+                <ScalarProperty Name="DpartMentID" ColumnName="DpartMentID" />
+                <ScalarProperty Name="REPORTING_MANAGER_EMAILID" ColumnName="REPORTING_MANAGER_EMAILID" />
+                <ScalarProperty Name="REPORTING_MANAGER_NAME" ColumnName="REPORTING_MANAGER_NAME" />
+                <ScalarProperty Name="REPORTING_MANAGER_ID" ColumnName="REPORTING_MANAGER_ID" />
+                <ScalarProperty Name="UNIT" ColumnName="UNIT" />
+                <ScalarProperty Name="EMAIL_ID" ColumnName="EMAIL_ID" />
+                <ScalarProperty Name="DEPARTMENT_NAME" ColumnName="DEPARTMENT_NAME" />
+                <ScalarProperty Name="DESIGNATION_NAME" ColumnName="DESIGNATION_NAME" />
+                <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="EMPLOYEENAME" ColumnName="EMPLOYEENAME" />
+                <ScalarProperty Name="EMPLOYEEID" ColumnName="EMPLOYEEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DesignationMasters">
+            <EntityTypeMapping TypeName="ConferenceHallModel.DesignationMaster">
+              <MappingFragment StoreEntitySet="DesignationMaster">
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+                <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

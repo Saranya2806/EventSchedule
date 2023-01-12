@@ -16,7 +16,7 @@ namespace EventSchedularNew
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index1", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "UserLogin", id = UrlParameter.Optional }
             );
         }
     }

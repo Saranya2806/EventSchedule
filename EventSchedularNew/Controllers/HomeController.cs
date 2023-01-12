@@ -9,15 +9,36 @@ namespace EventSchedularNew.Controllers
 {
     public class HomeController : Controller
     {
+        MeetingBusiness ObjBus = new MeetingBusiness();
         // GET: Home
         public ActionResult Index1()
         {
             return View();
         }
-        public  ActionResult Userlogin()
+        public ActionResult SelectSchedule()
         {
-            return View();
+            
+            var res = new MeetingLogin();
+            res.SelectPlant = ObjBus.Plant();
+            res.SelectPlant.Add(new SelectListItem() { Value = "0", Text = "----Select----" });
+            return View(res);
         }
+        public JsonResult SELUnit(int plantID)
+        {
+            var resunit = ObjBus.Unit(plantID);
+            return Json(resunit, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SELDept(int plantid,int unitid)
+        {
+            var resdept = ObjBus.Dept(plantid, unitid);
+            return Json(resdept, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SELStaff(int plantid,int unitid,int deptid,int empmode)
+        {
+            var resstaff = ObjBus.Staff(plantid, unitid, deptid, empmode);
+            return Json(resstaff, JsonRequestBehavior.AllowGet);
+        }
+       
 
         public JsonResult GetEvents()
         {

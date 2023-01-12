@@ -1,0 +1,152 @@
+﻿@model EventSchedularNew.Models.MeetingLogin
+@{
+    ViewBag.Title = "SelectSchedule";
+}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<html>
+<head>
+    <style>
+        h1 {
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-top:3%;margin-bottom:30%;padding-bottom:50%;padding-top:5%;">
+        <div class="container table-bordered" style="width:60%;border-color:#004d7b; margin-right:22%;margin-bottom:20%;">
+            <div class="col-sm-12" style="text-align:center;padding:2.5%">
+                <h1>
+                    <u> Online Conference Room Booking</u>
+                </h1>
+                <br />
+            </div>
+            <br />
+            <div class="col-sm-12" style="margin-left:-10%">
+                <div class="col-sm-12" style="padding-bottom:4.5%">
+                    <span class="col-sm-6" style="text-align:right">
+                        <label>Plant Name:</label>
+                    </span>
+                    <span class="col-sm-6" style="margin-left:-2%;width:52%;">
+                        @Html.DropDownListFor(a => a.PlantID, Model.SelectPlant, new { @id = "ddlplantname", @Style = "padding:1%;width:100%", @class = "form-control" })
+                    </span>
+                </div>
+                <div class="col-sm-12" style="padding-bottom:4.5%">
+                    <span class="col-sm-6" style="text-align:right">
+                        <label>Unit Name :</label>
+                    </span>
+                    <select style="width:100%;padding:1%;" id="ddlUnit" class="form-control">
+                        <option>----Select-----</option>
+                    </select>
+                </div>
+
+                <div class="col=sm-12" style="padding-bottom:4.5%">
+                    <span class="col-sm-6" style="text-align:right">
+                        <label>Department Name:</label>
+                    </span>
+                    <select style="width:100%;padding:1%;" id="ddlDept" class="form-control">
+                        <option>----Select-----</option>
+
+                    </select>
+                </div>
+
+                <div class="col=sm-12" style="padding-bottom:4.5%">
+                    <span class="col-sm-6" style="text-align:right">
+                        <label>Staff Name:</label>
+                    </span>
+                    <select style="width:100%;padding:1%;" id="ddlStaff" class="form-control">
+                        <option>----Select-----</option>
+
+                    </select>
+                </div>
+
+                <div class="col-sm-12" style="text-align:right;padding-bottom:8.5%;padding-top:5.5%;padding-right:29.5%">
+                    <button class="btn btn-success" id="btnsch" onclick=Schedule()>Go To Schedular</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    
+        $('#ddlplantname').on('change', function () {
+            newdata();
+        });
+
+    function newdata() {
+        debugger;
+        var plantID = $('#ddlplantname').val();
+        $.ajax({
+            url: "/Home/SELUnit",
+            data: { plantid: plantID },
+            dataType: 'json',
+            success: function (res) {
+                if (res.length > 0) {
+                    $('#ddlUnit').empty();
+                    $.each(res, function (key, value) {
+                        debugger;
+                        $('#ddlUnit').append($("<option></option>").attr("value", value.Value).text(value.Text));
+                    });
+                }
+                $('#ddlUnit').val(0);
+            }
+        });
+    }
+
+    $('#ddlUnit').on('change', function () {
+        debugger;
+        var Plantid = $('#ddlplantname').val();
+        var Unitid = $('#ddlUnit').val();
+        $.ajax({
+            url: "/Home/SELDept",
+            data: { plantid: Plantid, unitid: Unitid },
+            dataType: 'json',
+            success: function (res) {
+                if (res.length > 0) {
+                    $('#ddlDept').empty();
+                    $.each(res, function (key, value) {
+                        $('#ddlDept').append($("<option></option>").attr("value", value.Value).text(value.Text));
+
+                    });
+
+
+                }
+            }
+        });
+    });
+
+    $('#ddlDept').on('change', function () {
+        debugger;
+        var Plantid = $('#ddlplantname').val();
+        var Unitid = $('#ddlUnit').val();
+        var Deptid = $('#ddlDept').val();
+        var Empmode = 1;
+        $.ajax({
+            url: '/Home/SELStaff',
+            data: { plantid: Plantid, unitid: Unitid, deptid: Deptid, empmode: Empmode },
+            dataType: 'json',
+            success: function (resstaff) {
+                if (resstaff.length > 0) {
+                    $('#ddlStaff').empty();
+                    $.each(resstaff, function (key, value) {
+                        $('#ddlStaff').append($("<option></option>").attr("value", value.Value).text(value.Text));
+                    });
+                }
+            }
+
+        });
+
+    });
+
+    function Schedule() {
+        window.location.href = '/Home/Index1';
+    }
+
+    
+
+   
+
+
+
+</script>
