@@ -3,6 +3,7 @@
     ViewBag.Title = "SelectSchedule";
 }
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <html>
 
 <body>
@@ -70,7 +71,7 @@
         });
 
     function newdata() {
-        debugger;
+       
         var plantID = $('#ddlplantname').val();
         $.ajax({
             url: "/Home/SELUnit",
@@ -90,7 +91,7 @@
     }
 
     $('#ddlUnit').on('change', function () {
-        debugger;
+      
         var Plantid = $('#ddlplantname').val();
         var Unitid = $('#ddlUnit').val();
         $.ajax({
