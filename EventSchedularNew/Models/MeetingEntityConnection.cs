@@ -54,7 +54,7 @@ namespace EventSchedularNew.Models
                 {
                    
                     obj = objUni.UnitMasters.Where(a => a.PlantID == plantID).Select(e => new SelectListItem { Text = e.UnitName, Value = e.UnitID.ToString() }).ToList();
-                    obj.Insert(0, new SelectListItem { Value = "0",Text="----Select-----" });
+                    obj.Insert(0, new SelectListItem { Value = "0",Text="--Select--" });
 
                 }
             }
@@ -87,7 +87,7 @@ namespace EventSchedularNew.Models
                               
 
                            }).ToList();
-                    obj.Insert(0, new SelectListItem { Value = "0", Text = "-----Select-----" });
+                    obj.Insert(0, new SelectListItem { Value = "0", Text = "--Select--" });
                 }
             }
             catch (Exception e)
