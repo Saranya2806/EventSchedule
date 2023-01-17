@@ -137,11 +137,12 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Save Event</h4>
+
             </div>
             <div class="modal-body" style="overflow:scroll;height:550px;">
                 <form class="form-horizontal">
                     <input type="hidden" id="hdEventID" value="0" />
-                    <div class="form-group">
+                    <div class="form-group" id="empDetails">
                         <div><label>Employee ID :</label><label id="lblempid"> </label></div>
                         <div><label>Employee Name :</label> <label id="lblempName"></label></div>
 
@@ -388,6 +389,12 @@
                 }
                 $('#myModal').modal('hide');
                 $('#myModalSave').modal();
+
+        if(selectedEvent.empid==undefined)
+             $('#empDetails').hide();
+        else
+         $('#empDetails').show();
+
             }
             $('#btnSave').click(function () {
                 //Validation/
