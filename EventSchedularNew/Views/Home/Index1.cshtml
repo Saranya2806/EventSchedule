@@ -97,10 +97,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Online Booking</h2>
-<div>
-    <span>@ViewData["empID"]</span>
-    <span>@ViewData["empName"]</span>
+@*<h2>Online Booking</h2>*@
+<div class="col-lg-12" style="padding:1%;">
+
+    <span class="col-lg-2" style="font-weight:bold;">Employee ID : @ViewData["empID"]</span>
+    <input type="hidden" value="@ViewData["empID"]" id="hdnEmpID" />
+    <span class="col-lg-10" style="font-weight:bold;">Employee Name : @ViewData["empName"]</span>
+    <input type="hidden" value="@ViewData["empName"]" id="hdnEmpName" />
 </div>
 <div id="calender"></div>
 
@@ -135,15 +138,20 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Save Event</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="overflow:scroll;height:550px;">
                 <form class="form-horizontal">
                     <input type="hidden" id="hdEventID" value="0" />
                     <div class="form-group">
+                        <div><label>Employee ID :</label><label id="lblempid"> </label></div>
+                        <div><label>Employee Name :</label> <label id="lblempName"></label></div>
+
+                    </div>
+                    <div class="form-group">
                         <span><label>Subject</label></span>
                         <span><input type="text" id="txtSubject" class="form-control" /></span>
-                        
+
                     </div>
-                    <div class="form-group">    
+                    <div class="form-group">
                         <label>Start</label>
                         <div class="input-group date" id="dtp1">
                             <input type="text" id="txtStart" class="form-control" />
@@ -197,7 +205,10 @@
     .modal-body {
         padding-left: 20% !important;
     }
-   
+    .fc .fc-toolbar > * > :first-child {
+        margin-left: 0;
+        font-weight: bold;
+    }
 </style>
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
@@ -247,7 +258,9 @@
                             start: moment(v.start_date),
                             end: moment(v.end_date),
                             color: v.Themecolor,
-                            allDay: v.IsFullDay
+                            allDay: v.IsFullDay,
+                            empid: v.empID,
+                            empName: v.empName
                         });
                     })
 
@@ -311,7 +324,9 @@
                             end_date: event.end != null ? event.end.format('DD/MM/YYYY HH:mm A') : null,
                             Description: event.description,
                             Themecolor: event.color,
-                            IsFullDay: event.allDay
+                            IsFullDay: event.allDay,
+                            empID: event.empID,
+                            empName: event.empName
                         };
                         SaveEvent(data);
                     },
@@ -357,7 +372,8 @@
                     $('#divEndDate').show();
                 }
             });
-            function openAddEditForm() {
+        function openAddEditForm() {
+            debugger;
                 if (selectedEvent != null) {
                     $('#hdEventID').val(selectedEvent.eventID);
                     $('#txtSubject').val(selectedEvent.title);
@@ -367,6 +383,8 @@
                     $('#txtEnd').val(selectedEvent.end != null ? selectedEvent.end.format('DD/MM/YYYY HH:mm A') : '');
                     $('#txtDescription').val(selectedEvent.description);
                     $('#ddThemeColor').val(selectedEvent.color);
+                    $('#lblempid').text(selectedEvent.empid);
+                    $('#lblempName').text(selectedEvent.empName);
                 }
                 $('#myModal').modal('hide');
                 $('#myModalSave').modal();
@@ -402,7 +420,9 @@
                     end_date: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
                     Description: $('#txtDescription').val(),
                     ThemeColor: $('#ddThemeColor').val(),
-                    IsFullDay: $('#chkIsFullDay').is(':checked')
+                    IsFullDay: $('#chkIsFullDay').is(':checked'),
+                    empID: $('#hdnEmpID').val(),
+                    empName: $('#hdnEmpName').val()
                 }
                 debugger;
                 SaveEvent(data);

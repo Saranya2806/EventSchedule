@@ -68,6 +68,8 @@ namespace EventSchedularNew.Controllers
                         c.Description = e.Description;
                         c.IsFullDay = e.IsFullDay;
                         c.Themecolor = e.Themecolor;
+                        c.empID = e.empID;
+                        c.empName = e.empName;
 
                     }
                                      

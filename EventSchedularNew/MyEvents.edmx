@@ -82,6 +82,8 @@ warning 6002: The table/view 'ConferenceHall.dbo.ConferenceRoomMaster' does not 
           <Property Name="Description" Type="varchar" MaxLength="250" />
           <Property Name="IsFullDay" Type="bit" />
           <Property Name="Themecolor" Type="varchar" MaxLength="250" />
+          <Property Name="empID" Type="int" />
+          <Property Name="empName" Type="varchar" MaxLength="125" />
         </EntityType>
         <EntityType Name="EventsDatas">
           <Key>
@@ -118,6 +120,15 @@ warning 6002: The table/view 'ConferenceHall.dbo.NewEventsData' does not have a 
           <Property Name="Eve_ThemeColor" Type="nvarchar" MaxLength="10" />
           <Property Name="Eve_IsFullDay" Type="bit" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ConferenceHall.dbo.orders' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="orders">
+          <Property Name="orderId" Type="int" />
+          <Property Name="customerid" Type="int" />
+          <Property Name="employeeid" Type="int" />
+          <Property Name="orderdate" Type="varchar" MaxLength="50" />
+          <Property Name="shipperid" Type="int" />
+        </EntityType>-->
         <EntityType Name="PlantMaster">
           <Key>
             <PropertyRef Name="PlantID" />
@@ -206,6 +217,8 @@ warning 6002: The table/view 'ConferenceHall.dbo.NewEventsData' does not have a 
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="IsFullDay" Type="Boolean" />
           <Property Name="Themecolor" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="empID" Type="Int32" />
+          <Property Name="empName" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EventsData">
           <Key>
@@ -355,6 +368,8 @@ warning 6002: The table/view 'ConferenceHall.dbo.NewEventsData' does not have a 
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="ConferenceHallModel.Event">
               <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="empName" ColumnName="empName" />
+                <ScalarProperty Name="empID" ColumnName="empID" />
                 <ScalarProperty Name="Themecolor" ColumnName="Themecolor" />
                 <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
