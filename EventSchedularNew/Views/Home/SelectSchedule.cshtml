@@ -5,14 +5,9 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <html>
-<head>
-    <style>
-        h1 {
-        }
-    </style>
-</head>
+
 <body>
-    <div style="margin-top:3%;margin-bottom:30%;padding-bottom:50%;padding-top:5%;">
+    <div style="margin-top:3%;margin-bottom:30%;padding-bottom:50%;padding-top:0%;">
         <div class="container table-bordered" style="width:60%;border-color:#004d7b; margin-right:22%;margin-bottom:20%;">
             <div class="col-sm-12" style="text-align:center;padding:2.5%">
                 <h1>
@@ -35,7 +30,7 @@
                         <label>Unit Name :</label>
                     </span>
                     <select style="width:100%;padding:1%;" id="ddlUnit" class="form-control">
-                        <option>--Select--</option>
+                        <option value="0">--Select--</option>
                     </select>
                 </div>
 
@@ -44,7 +39,7 @@
                         <label>Department Name:</label>
                     </span>
                     <select style="width:100%;padding:1%;" id="ddlDept" class="form-control">
-                        <option>--Select--</option>
+                        <option value="0">--Select--</option>
 
                     </select>
                 </div>
@@ -54,7 +49,7 @@
                         <label>Staff Name:</label>
                     </span>
                     <select style="width:100%;padding:1%;" id="ddlStaff" class="form-control">
-                        <option>--Select--</option>
+                        <option value="0">--Select--</option>
 
                     </select>
                 </div>
@@ -141,7 +136,27 @@
     });
 
     function Schedule() {
-        window.location.href = '/Home/Index1';
+        if ($('#ddlplantname').val() == '0') {
+            alert('Please Select Plant Name');
+            return;
+        }
+        else if ($('#ddlUnit').val() == '0') {
+            alert('Please Select Unit Name');
+            return;
+        }
+        else if ($('#ddlDept').val() == '0') {
+            alert('Please Select Department Name');
+            return;
+        }
+        else if ($('#ddlStaff').val() == '0') {
+            alert('Please Select Staff Name');
+            return;
+        }
+        else {
+            var empId = $('#ddlStaff').val();
+            var empName = $('#ddlStaff option:selected').text();
+            window.location.href = '/Home/Index1?employeeId=' + empId + '&employeeNme=' + empName;
+        }
     }
 
     

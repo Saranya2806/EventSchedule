@@ -14,8 +14,9 @@ namespace EventSchedularNew.Models
             [Required(ErrorMessage = "User ID Invalid")]
             public int? UserID { get; set; }
 
-            [RegularExpression("/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8}/g",
-              ErrorMessage = "Password must meet requirements")]
+        [Required(ErrorMessage = "Inavlid Password")]
+        //[RegularExpression("/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8}/g", ErrorMessage = "Password must meet requirements")]
+           
             public string PassWord { get; set; }
         public int PlantID { get; set; }
         public string PlantName { get; set; }

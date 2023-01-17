@@ -11,8 +11,10 @@ namespace EventSchedularNew.Controllers
     {
         MeetingBusiness ObjBus = new MeetingBusiness();
         // GET: Home
-        public ActionResult Index1()
+        public ActionResult Index1(string employeeId,string employeeNme)
         {
+            ViewData["empId"] = employeeId;
+            ViewData["empName"] = employeeNme;
             return View();
         }
         public ActionResult SelectSchedule()
@@ -66,6 +68,8 @@ namespace EventSchedularNew.Controllers
                         c.Description = e.Description;
                         c.IsFullDay = e.IsFullDay;
                         c.Themecolor = e.Themecolor;
+                        c.empID = e.empID;
+                        c.empName = e.empName;
 
                     }
                                      

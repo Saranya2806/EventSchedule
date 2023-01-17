@@ -18,22 +18,25 @@ namespace EventSchedularNew.Controllers
         [HttpPost]
         public ActionResult UserLogin(MeetingLogin mtl)
         {
-            var res = objBus.Login(mtl);
-            if(mtl.UserID==res.UserID)
+            if (ModelState.IsValid)
             {
-                if(mtl.PassWord==res.PassWord)
-                {
-                    return RedirectToAction("SelectSchedule", "Home");
-                }
-                else
-                {
-                    return RedirectToAction("UserLogin");
-                }
+                //var res = objBus.Login(mtl);
+                //if (res != null)
+                //{
+
+                //    if (mtl.UserID == res.UserID)
+                //    {
+                //        if (mtl.PassWord == res.PassWord)
+                //        {
+                //            return RedirectToAction("SelectSchedule", "Home");
+                //        }
+                //    }
+                //}
+                return RedirectToAction("SelectSchedule", "Home");
             }
             else
-            {
                 return RedirectToAction("UserLogin");
-            }
+            
         }
        
     }

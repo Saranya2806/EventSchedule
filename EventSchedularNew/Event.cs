@@ -24,5 +24,7 @@ namespace EventSchedularNew
         public string Description { get; set; }
         public Nullable<bool> IsFullDay { get; set; }
         public string Themecolor { get; set; }
+        public Nullable<int> empID { get; set; }
+        public string empName { get; set; }
     }
 }
