@@ -161,6 +161,7 @@
     <Compile Include="Models\MeetingBusiness.cs" />
     <Compile Include="Models\MeetingEntityConnection.cs" />
     <Compile Include="Models\Meetinglogin.cs" />
+    <Compile Include="Models\StaffRoom.cs" />
     <Compile Include="MyEvents.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

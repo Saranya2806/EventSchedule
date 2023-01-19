@@ -38,6 +38,10 @@ namespace EventSchedularNew.Controllers
                 return RedirectToAction("UserLogin");
             
         }
+        public ActionResult logOut ()
+        {
+           return RedirectToAction ("UserLogin");
+        }
        
     }
 }

@@ -97,14 +97,16 @@ namespace EventSchedularNew.Models
             return obj;
         }
 
-        public List<SelectListItem> SelStaff(int plantid, int unitid, int deptid,int empmode)
+        public StaffRoom SelStaff(int plantid, int unitid, int deptid,int empmode)
         {
-            var obj = new List<SelectListItem>();
+            StaffRoom objSR = new StaffRoom();
+            var objStaff = new List<SelectListItem>();
+            var objRoom = new List<SelectListItem>();
             try
             {
                 using(ConferenceHallEntities3 objsta =new ConferenceHallEntities3())
                 {
-                    obj = (from em in objsta.EmployeeMasters
+                    objStaff = (from em in objsta.EmployeeMasters
                            join dm in objsta.DepartmentMasters on em.DpartMentID equals dm.DepartmentID
                            join um in objsta.UnitMasters on dm.UnitID equals um.UnitID
                            join pm in objsta.PlantMasters on um.PlantID equals pm.PlantID
@@ -114,15 +116,57 @@ namespace EventSchedularNew.Models
                                Value=em.EMPLOYEEID.ToString(),
                                Text=em.EMPLOYEENAME                                                           
                            }).ToList();
-                    obj.Insert(0, new SelectListItem { Value = "0", Text = "--Select--" });
+                    objStaff.Insert(0, new SelectListItem { Value = "0", Text = "--Select--" });
+                    objSR.lstStaff = objStaff;
+                    objRoom = (from cr in objsta.ConferenceRoomMasters
+                                join um in objsta.UnitMasters on cr.UnitID equals um.UnitID
+                                join pm in objsta.PlantMasters on um.PlantID equals pm.PlantID
+                                where pm.PlantID == plantid && um.UnitID == unitid  
+                                select new SelectListItem
+                                {
+                                    Value = cr.RoomID.ToString(),
+                                    Text = cr.RoomName
+                                }).ToList();
+                    objRoom.Insert(0, new SelectListItem { Value = "0", Text = "--Select--" });
+                    objSR.lstRoom = objRoom;
                 }
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.Message, ToString(), "SelStaff");
             }
-            return obj;
+            return objSR;
 
         }
+
+        public List<Events> getEventApprovedDetails()
+        {
+            var lstobj =new List<Events>();
+            try
+            {
+                using(ConferenceHallEntities3 objEve=new ConferenceHallEntities3 ())
+                {
+                    lstobj = (from ev in objEve.Events
+                              join em in objEve.EmployeeMasters on ev.empID equals em.EMPLOYEEID
+                              select new Events
+                              {
+                                  EmpID = ev.empID,
+                                  EmpName = em.EMPLOYEENAME,
+                                  start_date = ev.start_date,
+                                  end_date = ev.end_date,
+                                  BookingHall = "Madras Board Room",
+                                  IsFullDay = ev.IsFullDay,
+                                  Status = "Approved"
+                              }).ToList();
+                }
+             
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message, ToString(), "getEventApprovedDetails");
+            }
+            return lstobj;
+        }
+        
     }
 }

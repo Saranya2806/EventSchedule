@@ -37,7 +37,7 @@
 
 <script>
     $(document).ready(function () {
-        debugger;
+        
         var events = [];
         $.ajax({
             type: "GET",
@@ -104,6 +104,8 @@
     <input type="hidden" value="@ViewData["empID"]" id="hdnEmpID" />
     <span class="col-lg-10" style="font-weight:bold;">Employee Name : @ViewData["empName"]</span>
     <input type="hidden" value="@ViewData["empName"]" id="hdnEmpName" />
+    <input type="hidden" value="@ViewData["roomID"]" id="hdnroomID" />
+    <input type="hidden" value="@ViewData["roomName"]" id="hdnroomName" />
 </div>
 <div id="calender"></div>
 
@@ -142,6 +144,10 @@
             <div class="modal-body" style="overflow:scroll;height:550px;">
                 <form class="form-horizontal">
                     <input type="hidden" id="hdEventID" value="0" />
+                    <div class="form-group">
+                        <div><label>Conference Hall</label></div>
+                        <div><label id="lblConference" />@ViewData["roomName"]</div>
+                    </div>
                     <div class="form-group" id="empDetails">
                         <div><label>Employee ID :</label><label id="lblempid"> </label></div>
                         <div><label>Employee Name :</label> <label id="lblempName"></label></div>
@@ -218,7 +224,6 @@
 
     <script>
         $(document).ready(function () {
-            debugger;
             var events = [];
             var SelectedEvent = null;
             FetchEventAndRenderCalendar();
@@ -273,7 +278,7 @@
             })
         }
         function GenerateCalender(events) {
-            debugger;
+            
                 $('#calender').fullCalendar('destroy');
                 $('#calender').fullCalendar({
                     contentHeight: 400,
@@ -288,7 +293,7 @@
                     eventColor: '#378006',
                     events: events,
                     eventClick: function (calEvent, jsEvent, view) {
-                        debugger;
+                        
                         selectedEvent = calEvent;
                         $('#myModal #eventTitle').text(calEvent.title);
                         var $description = $('<div/>');
@@ -317,7 +322,7 @@
                     },
                     editable: true,
                     eventDrop: function (event) {
-                        debugger;
+                        
                         var data = {
                             id: event.eventID,
                             subject: event.title,
@@ -338,7 +343,7 @@
                 openAddEditForm();
             });
         $("#btndelete").click(function () {
-            debugger;
+            
                 if (selectedEvent != null && confirm("Want delete?")) {
                     $.ajax({
                         type: "POST",
@@ -374,7 +379,7 @@
                 }
             });
         function openAddEditForm() {
-            debugger;
+            
                 if (selectedEvent != null) {
                     $('#hdEventID').val(selectedEvent.eventID);
                     $('#txtSubject').val(selectedEvent.title);
@@ -386,6 +391,8 @@
                     $('#ddThemeColor').val(selectedEvent.color);
                     $('#lblempid').text(selectedEvent.empid);
                     $('#lblempName').text(selectedEvent.empName);
+
+                    //$('#lblConference').text(selectedEvent)
                 }
                 $('#myModal').modal('hide');
                 $('#myModalSave').modal();
@@ -398,7 +405,7 @@
             }
             $('#btnSave').click(function () {
                 //Validation/
-                debugger;
+                
                 if ($('#txtSubject').val().trim() == "") {
                     alert('Subject required');
                     return;
@@ -431,12 +438,12 @@
                     empID: $('#hdnEmpID').val(),
                     empName: $('#hdnEmpName').val()
                 }
-                debugger;
+                
                 SaveEvent(data);
                 // call function for submit data to the server
             });
         function SaveEvent(data) {
-            debugger;
+            
                 $.ajax({
                     type: "POST",
                     url: '/home/SaveEvent',
