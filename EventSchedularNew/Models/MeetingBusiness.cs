@@ -29,10 +29,15 @@ namespace EventSchedularNew.Models
             var res = objEntity.SelDept(plantid, unitid);
             return res.ToList();
         }
-        public List<SelectListItem>Staff(int plantid,int unitid,int deptid,int empmode)
+        public StaffRoom Staff(int plantid,int unitid,int deptid,int empmode)
         {
             var res = objEntity.SelStaff(plantid, unitid, deptid, empmode);
-            return res.ToList();
+            return res;
+        }
+        public List<Events> getEvents()
+        {
+            var eveRes = objEntity.getEventApprovedDetails();
+            return eveRes.ToList();
         }
             
     }

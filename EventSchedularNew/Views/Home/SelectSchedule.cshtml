@@ -7,7 +7,7 @@
 <html>
 
 <body>
-    <div style="margin-top:3%;margin-bottom:30%;padding-bottom:50%;padding-top:0%;">
+    <div style="margin-top:3%;margin-bottom:30%;padding-bottom:50%;padding-top:3%;">
         <div class="container table-bordered" style="width:60%;border-color:#004d7b; margin-right:22%;margin-bottom:20%;">
             <div class="col-sm-12" style="text-align:center;padding:2.5%">
                 <h1>
@@ -54,6 +54,16 @@
                     </select>
                 </div>
 
+                <div class="col=sm-12" style="padding-bottom:4.5%">
+                    <span class="col-sm-6" style="text-align:right">
+                        <label>Booking Room:</label>
+                    </span>
+                    <select style="width:100%;padding:1%;" id="ddlRoom" class="form-control">
+                        <option value="0">--Select--</option>
+
+                    </select>
+                </div>
+
                 <div class="col-sm-12" style="text-align:right;padding-bottom:8.5%;padding-top:5.5%;padding-right:29.5%">
                     <button class="btn btn-success" id="btnsch" onclick=Schedule()>Go To Schedular</button>
 
@@ -81,7 +91,7 @@
                 if (res.length > 0) {
                     $('#ddlUnit').empty();
                     $.each(res, function (key, value) {
-                        debugger;
+                        
                         $('#ddlUnit').append($("<option></option>").attr("value", value.Value).text(value.Text));
                     });
                 }
@@ -113,7 +123,7 @@
     });
 
     $('#ddlDept').on('change', function () {
-        debugger;
+        
         var Plantid = $('#ddlplantname').val();
         var Unitid = $('#ddlUnit').val();
         var Deptid = $('#ddlDept').val();
@@ -123,11 +133,17 @@
             data: { plantid: Plantid, unitid: Unitid, deptid: Deptid, empmode: Empmode },
             dataType: 'json',
             success: function (resstaff) {
-                if (resstaff.length > 0) {
+                if (resstaff.lstStaff.length > 0) {
                     $('#ddlStaff').empty();
-                    $.each(resstaff, function (key, value) {
+                    $.each(resstaff.lstStaff, function (key, value) {
                         $('#ddlStaff').append($("<option></option>").attr("value", value.Value).text(value.Text));
                     });
+                    if (resstaff.lstStaff.length > 0) {
+                        $('#ddlRoom').empty();
+                        $.each(resstaff.lstRoom, function (key, value) {
+                            $('#ddlRoom').append($("<option></option>").attr("value", value.Value).text(value.Text));
+                        });
+                    }
                 }
             }
 
@@ -152,10 +168,25 @@
             alert('Please Select Staff Name');
             return;
         }
+        else if ($('#ddlRoom').val() == '0') {
+            alert('Please Select Room');
+            return;
+        }
         else {
-            var empId = $('#ddlStaff').val();
-            var empName = $('#ddlStaff option:selected').text();
-            window.location.href = '/Home/Index1?employeeId=' + empId + '&employeeNme=' + empName;
+            
+            var eveData = {
+                empid: $('#ddlStaff').val(),
+                EmpName: $('#ddlStaff option:selected').text(),
+                RoomID: $('#ddlRoom').val(),
+                RoomName: $('#ddlRoom option:selected').text()
+            }
+            var p = $.param(eveData)
+            //var empId = $('#ddlStaff').val();
+            //var empName = $('#ddlStaff option:selected').text();
+            //var roomId = $('#ddlRoom').val();
+            //var roomName = $('#ddlRoom option:selected').text();
+            //window.location.href = '/Home/Index1?employeeId=' + empId + '&employeeNme=' + empName + '&roomID=' + roomId + '&roomName=' + roomName ;
+            window.location.href = '/Home/Index1?' + p;
         }
     }
 

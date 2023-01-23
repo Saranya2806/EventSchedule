@@ -11,10 +11,12 @@ namespace EventSchedularNew.Controllers
     {
         MeetingBusiness ObjBus = new MeetingBusiness();
         // GET: Home
-        public ActionResult Index1(string employeeId,string employeeNme)
+        public ActionResult Index1(int empid, string EmpName, string RoomID, string RoomName)
         {
-            ViewData["empId"] = employeeId;
-            ViewData["empName"] = employeeNme;
+            ViewData["empId"] = empid;
+            ViewData["empName"] = EmpName;
+            ViewData["roomID"] = RoomID;
+            ViewData["roomName"] = RoomName;
             return View();
         }
         public ActionResult SelectSchedule()
@@ -56,34 +58,35 @@ namespace EventSchedularNew.Controllers
             }        
         }
         [HttpPost]
-        public JsonResult SaveEvent(Event e)
+        public JsonResult SaveEvent(Event eve)
         {
             var status = false;
             using(ConferenceHallEntities3 obj=new ConferenceHallEntities3())
             {
-                if(e.id >0)
+                if(eve.id >0)
                 {
-                    var c = obj.Events.Where(a => a.id == e.id).FirstOrDefault();
-                    if(c!=null)
+                    var eventData = obj.Events.Where(a => a.id == eve.id).FirstOrDefault();
+                    if(eventData != null)
                     {
-                        c.subject = e.subject;
-                        c.start_date =Convert.ToDateTime(e.start_date);
-                        c.end_date =Convert.ToDateTime(e.end_date);
-                        c.Description = e.Description;
-                        c.IsFullDay = e.IsFullDay;
-                        c.Themecolor = e.Themecolor;
-                        c.empID = e.empID;
-                        c.empName = e.empName;
+                        eventData.subject = eve.subject;
+                        eventData.start_date =Convert.ToDateTime(eve.start_date);
+                        eventData.end_date =Convert.ToDateTime(eve.end_date);
+                        eventData.Description = eve.Description;
+                        eventData.IsFullDay = eve.IsFullDay;
+                        eventData.Themecolor = eve.Themecolor;
+                        eventData.empID = eve.empID;
+                        eventData.empName = eve.empName;
+                        eventData.RoomId = eve.RoomId;
 
                     }
                                      
                 }
                 else
                 {
-                    if (e.end_date.Equals(DateTime.MinValue))
-                        e.end_date = null;
+                    if (eve.end_date.Equals(DateTime.MinValue))
+                        eve.end_date = null;
 
-                        obj.Events.Add(e);
+                        obj.Events.Add(eve);
                 }
                 obj.SaveChanges();
                 status = true;

@@ -8,15 +8,20 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="col-lg-12" style="background-color:brown;">
+    <div class="col-lg-12" style="background-color: #398ae6;">
         <div class="col-lg-2">
-            <img src="~/images/syrmaSGS-New.png" />
+            <img src="~/images/syrmaSGS-New.png" style="width:54%;" />
         </div>
-        <div  class="col-lg-10">
-            <label>Online Hall Booking</label>
+        <div class="navbar-collapse collapse col-lg-10" style="float:right;">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("HR Permission", "Index", "Home")</li>
+                <li>@*@Html.ActionLink("About", "About", "Home")*@</li>
+                <li>@Html.ActionLink("Logout", "logOut", "Login")</li>
+            </ul>
         </div>
     </div>
-  
+   
+   
     <!--<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -27,16 +32,17 @@
                     </button>
                     @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>-->
-            @*<div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                </div>*@
+    @*<div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+        </div>*@
 
-        <!--</div>
+    <!--</div>
     </div>-->
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -53,5 +59,12 @@
 <style>
     body {
         padding-top: 0px !important;
+    }
+    nav.navbar li a {
+        color: white !important;
+    }
+   li a {
+        color: #0f1821 !important;
+        font-size: large;
     }
 </style>

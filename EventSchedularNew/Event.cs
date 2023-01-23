@@ -26,5 +26,7 @@ namespace EventSchedularNew
         public string Themecolor { get; set; }
         public Nullable<int> empID { get; set; }
         public string empName { get; set; }
+        public Nullable<int> RoomId { get; set; }
+
     }
 }
