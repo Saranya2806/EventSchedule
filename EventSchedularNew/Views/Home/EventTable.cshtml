@@ -1,0 +1,590 @@
+﻿@Model List<EventSchedularNew.Models.Events>
+
+    @{
+        ViewBag.Title = "EventTable";
+    }
+
+    <h2>EventTable</h2>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    </head>
+    <body>
+        <div class="container1">
+            <h1 class="text-center text-primary">Employee Details</h1>
+
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="table-responsive">
+
+                        <input type="text" id="search" placeholder="Search here">
+
+
+
+
+
+                        <table id="table" class="table table-bordered text-center">
+
+
+
+                            <tr class="bg-primary btn-group-sm">
+                                <th>
+                                    <input id="check_all" type="checkbox">
+                                </th>
+                                <th onclick="sortTable(1)" class="text-center">Employee ID</th>
+                                <th onclick="sortTable(2)" class="text-center">Name</th>
+                                <th onclick="sortTable(3)" class="text-center"> Hall </th>
+                                <th onclick="sortTable(4)" class="text-center"> Start Time</th>
+                                <th onclick="sortTable(5)" class="text-center"> End Time</th>
+                                <th onclick="sortTable(6)" class="text-center">Subject</th>
+                                <th onclick="sortTable(7)" class="text-center"> Action</th>
+
+
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><input type="checkbox" name="row-check" value="1"></td>
+                                    <td>@item.E</td>
+                                    <td>Muthu </td>
+                                    <td>Rfid </td>
+                                    <td>8:20</td>
+                                    <td>11:00</td>
+                                    <td>Customer visit</td>
+                                    <td>
+                                        <a href=' # '>
+                                            <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                        </a>
+                                        <a href=' # '>
+                                            <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                        </a>
+                                        <a href=' # '>
+                                            <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                        </a>
+                                    </td>
+
+
+
+                                </tr>
+                            }
+
+
+                            <tr>
+                                <td> <input type="checkbox" name="row-check" value="2"></td>
+                                <td>70585</td>
+                                <td>Raj </td>
+                                <td>Pohc </td>
+                                <td>9:20</td>
+                                <td>02:00</td>
+                                <td>Interview</td>
+                                <td>
+
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+
+
+                            </tr>
+
+                            <tr>
+                                <td> <input type="checkbox" name="row-check" value="3"></td>
+                                <td>70546</td>
+                                <td>John </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>General Meeting</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox" name="row-check" value="4"></td>
+                                <td>70547</td>
+                                <td>Joseph </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>Financial Meeting</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+
+                            </tr>
+
+                            <tr>
+                                <td> <input type="checkbox" name="row-check" value="5"></td>
+                                <td>70548</td>
+                                <td>Divya </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>Employee Meeting</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+
+                            </tr>
+
+                            <tr>
+                                <td> <input type="checkbox" name="row-check" value="6"></td>
+                                <td>70549</td>
+                                <td>Priya </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>Fun do</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td> <input type="checkbox" name="row-check" value="7"></td>
+                                <td>70550</td>
+                                <td>Jeni </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>Lets Speak</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td> <input type="checkbox" name="row-check" value="8"></td>
+                                <td>70551</td>
+                                <td>Mick </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>GD Interview</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox" name="row-check" value="9"></td>
+                                <td>70552</td>
+                                <td>Rock </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>HR Meeting</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox" name="row-check" value="10"></td>
+                                <td>70553</td>
+                                <td>Preeti </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>Product Review</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox" name="row-check" value="11"></td>
+                                <td>70554</td>
+                                <td>Pilot </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>Brainstrom</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td> <input type="checkbox" name="row-check" value="12"></td>
+                                <td>70555</td>
+                                <td>Alim </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>SDC</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td> <input type="checkbox" name="row-check" value="13"></td>
+                                <td>70556</td>
+                                <td>Reena </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>Quality Meeting</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox" name="row-check" value="14"></td>
+                                <td>70557</td>
+                                <td>Thaman </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>Outting Plan</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td> <input type="checkbox" name="row-check" value="15"></td>
+                                <td>70558</td>
+                                <td>Ashok </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>Visit</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox" name="row-check" value="16"></td>
+                                <td>70559</td>
+                                <td>krishna </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>Presentation</td>
+                                <td>
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox" name="row-check" value="17"></td>
+                                <td>70560</td>
+                                <td>Vinod </td>
+                                <td>Rfid </td>
+                                <td>8:20</td>
+                                <td>11:00</td>
+                                <td>President Meeting</td>
+                                <td align="center">
+
+                                    <a href=' # '>
+                                        <i class="w3-large fa fa-pause-circle" style="color:blue;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-check-square " style="color:green;"></i>
+                                    </a>
+                                    <a href=' # '>
+                                        <i class="w3-large w3-margin-left fa fa-trash" style="color:red;"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+
+
+                        </table>
+
+
+
+                        <ul class="pagination ">
+                            <li> <a href="#"> << </a></li>
+                            <li class="active"> <a href="#"> 1 </a></li>
+                            <li> <a href="#"> 2 </a></li>
+                            <li> <a href="#"> 3 </a></li>
+                            <li> <a href="#"> 4 </a></li>
+                            <li> <a href="#"> 5 </a></li>
+                            <li> <a href="#"> 6 </a></li>
+                            <li> <a href="#"> 7 </a></li>
+                            <li> <a href="#"> >> </a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>
+
+<style>
+
+    .container1 {
+        border: 1px solid;
+        padding: 3%;
+    }
+</style>
+
+
+
+<script>
+    var $rows = $('#table tr');
+    $('#search').keyup(function () {
+
+        var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+            reg = RegExp(val, 'i'),
+            text;
+
+        $rows.show().filter(function () {
+            text = $(this).text().replace(/\s+/g, ' ');
+            return !reg.test(text);
+        }).hide();
+    });
+
+</script>
+
+
+
+<script>
+    function deleteRow(r) {
+        var i = r.parentNode.parentNode.rowIndex;
+        document.getElementById("table").deleteRow(i);
+    }
+</script>
+
+
+<script>
+    $(function () {
+        //If check_all checked then check all table rows
+        $("#check_all").on("click", function () {
+            if ($("input:checkbox").prop("checked")) {
+                $("input:checkbox[name='row-check']").prop("checked", true);
+            } else {
+                $("input:checkbox[name='row-check']").prop("checked", false);
+            }
+        });
+
+        // Check each table row checkbox
+        $("input:checkbox[name='row-check']").on("change", function () {
+            var total_check_boxes = $("input:checkbox[name='row-check']").length;
+            var total_checked_boxes = $("input:checkbox[name='row-check']:checked").length;
+
+            // If all checked manually then check check_all checkbox
+            if (total_check_boxes === total_checked_boxes) {
+                $("#check_all").prop("checked", true);
+            }
+            else {
+                $("#check_all").prop("checked", false);
+            }
+        });
+    });
+
+</script>
+
+<script>
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("table");
+        switching = true;
+        //Set the sorting direction to ascending:
+        dir = "asc";
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /*check if the two rows should switch place,
+                based on the direction, asc or desc:*/
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                //Each time a switch is done, increase this count by 1:
+                switchcount++;
+            } else {
+                /*If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again.*/
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
+
+
+
+
+

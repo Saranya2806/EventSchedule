@@ -40,6 +40,10 @@ namespace EventSchedularNew.Controllers
             var resstaff = ObjBus.Staff(plantid, unitid, deptid, empmode);
             return Json(resstaff, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult EventTable()
+        {
+            return View();
+        }
        
 
         public JsonResult GetEvents()
