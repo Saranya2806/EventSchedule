@@ -1,0 +1,382 @@
+﻿@model List<EventSchedularNew.Models.Events>
+
+    @{
+        ViewBag.Title = "EventTable";
+    }
+
+    
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    </head>
+    <body>
+        <div class="container1">
+            <h1 class="text-center text-primary"> <u>Employee Details</u></h1>
+
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="table-responsive">
+
+
+                        <input type="text" id="search" placeholder="Search here">
+
+
+
+
+
+                        <br />
+                        <br />
+
+                        <table id="eventsch" class="table table-bordered text-center">
+
+
+
+                            <tr class="bg-primary btn-group-sm">
+                                <th>
+                                    <input id="check_all" type="checkbox">
+                                </th>
+                                <th onclick="sortTable(0)" class="text-center hidden">ID</th>
+                                <th onclick="sortTable(1)" class="text-center">Employee ID</th>
+                                <th onclick="sortTable(2)" class="text-center">Name</th>
+                                <th onclick="sortTable(3)" class="text-center"> Hall </th>
+                                <th onclick="sortTable(4)" class="text-center"> Start Time</th>
+                                <th onclick="sortTable(5)" class="text-center"> End Time</th>
+                                <th onclick="sortTable(6)" class="text-center">Subject</th>
+                                <th onclick="sortTable(7)" class="text-center">Status</th>
+                                <th class="text-center"> Action</th>
+
+
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                            <tbody id="fixed">
+                                <tr >
+
+                                    <td><input type="checkbox" name="row-check" value="1" eventid="@item.id"></td>
+                                    <td class="hidden">@item.id</td>
+                                    <td>@item.EmpID</td>
+                                    <td>@item.EmpName </td>
+                                    <td>@item.BookingHall </td>
+                                    <td>@item.start_date</td>
+                                    <td>@item.end_date</td>
+                                    <td>@item.subject</td>
+                                    <td>@item.Status</td>
+                                    <td>
+                                        @*<a href=' #'>
+
+                        </a>*@
+
+
+                                        <span>
+                                            <i class="w3-large fa fa-check-square " onclick="iApprove(@item.id,'Approve')" style="color:green;"></i>
+                                        </span>
+                                        <span>
+                                            <i class="w3-large fa fa-pause-circle" onclick="iApprove(@item.id,'Hold')" style="color:blue;"></i>
+                                        </span>
+
+                                        <span>
+                                            <i class="w3-large fa fa-remove" onclick="iApprove(@item.id,'Reject')" style="color:red;"></i>
+                                        </span>
+                                    </td>
+                                 </tr>
+                            </tbody>
+                                }
+                        </table>
+                        <button type="button" class="btn btn-success" id="btnapprove" onclick="Approve()">Approve</button>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+
+
+
+<style>
+    .container1 {
+        border: 1px solid;
+        padding: 1%;
+        margin: 5%;
+        width:100%;
+        border-color: #004d7b;
+        margin-right: 22%;
+        margin-left:1%;
+        margin-bottom: 20%
+    }
+            body {
+                background-color:white;
+            }
+
+            table th, table td {
+                text-align: center;
+            }
+
+            table tr:nth-child(even) {
+                background-color: #BEF2F5
+            }
+
+            .pagination li:hover {
+                cursor: pointer;
+            }
+        
+</style>
+
+    <script>
+        var $rows = $('#fixed tr');
+        $('#search').keyup(function () {
+
+            var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+                reg = RegExp(val, 'i'),
+                text;
+
+            $rows.show().filter(function () {
+                text = $(this).text().replace(/\s+/g, ' ');
+                return !reg.test(text);
+            }).hide();
+        });
+
+
+        function Approve() {
+            debugger;
+            var str = new Array();
+            if ($('#eventsch').find('input[type=checkbox]:checked').length > 0) {
+                $('#eventsch').find('input[type=checkbox]:checked').each(function (index) {
+                    if ($('#check_all').is(':checked')) {
+                        if (index != 0)
+                            str.push($(this).attr('eventid'));
+                    }
+                    else
+                        str.push($(this).attr('eventid'));
+                });
+               
+            }
+            var event = str.join(',');
+            iApprove(event, status);
+        }
+      
+
+        
+
+        function iApprove(eventId, status) {
+            debugger;
+            var eveid = eventId.toString();
+            var eveStatus = status;
+            $.ajax({
+                url: '/Home/updateEvent',
+                dataType: 'json',
+                data: { eventID: eveid, eventStatus: eveStatus },
+                async: false,
+                success: function (result) {
+                    if (result == 1)
+                        alert("Insert Successfully");
+                    else
+                        alert("Not Insert");
+                },
+                error: function (result) {
+                    alert(result);
+                },
+            });
+        }
+
+   
+
+
+
+    
+        function deleteRow(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("table").deleteRow(i);
+        }
+   
+
+
+    
+        $(function () {
+            //If check_all checked then check all table rows
+            $("#check_all").on("click", function () {
+                if ($("input:checkbox").prop("checked")) {
+                    $("input:checkbox[name='row-check']").prop("checked", true);
+                } else {
+                    $("input:checkbox[name='row-check']").prop("checked", false);
+                }
+            });
+
+            // Check each table row checkbox
+            $("input:checkbox[name='row-check']").on("change", function () {
+                var total_check_boxes = $("input:checkbox[name='row-check']").length;
+                var total_checked_boxes = $("input:checkbox[name='row-check']:checked").length;
+
+                // If all checked manually then check check_all checkbox
+                if (total_check_boxes === total_checked_boxes) {
+                    $("#check_all").prop("checked", true);
+                }
+                else {
+                    $("#check_all").prop("checked", false);
+                }
+            });
+        });
+
+    
+
+   
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("eventsch");
+            switching = true;
+            //Set the sorting direction to ascending:
+            dir = "asc";
+            /*Make a loop that will continue until
+            no switching has been done:*/
+            while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /*Loop through all table rows (except the
+                first, which contains table headers):*/
+                for (i = 1; i < (rows.length - 1); i++) {
+                    //start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /*Get the two elements you want to compare,
+                    one from current row and one from the next:*/
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    /*check if the two rows should switch place,
+                    based on the direction, asc or desc:*/
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    /*If a switch has been marked, make the switch
+                    and mark that a switch has been done:*/
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    //Each time a switch is done, increase this count by 1:
+                    switchcount++;
+                } else {
+                    /*If no switching has been done AND the direction is "asc",
+                    set the direction to "desc" and run the while loop again.*/
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+   
+   
+        addPagerToTables('#eventsch', 10);
+
+    function addPagerToTables(tables, rowsPerPage = 1) {
+
+        tables =
+            typeof tables == "string"
+                ? document.querySelectorAll(tables)
+                : tables;
+
+        for (let table of tables)
+            addPagerToTable(table, rowsPerPage);
+
+    }
+
+    function addPagerToTable(table, rowsPerPage = 10) {
+
+        let tBodyRows = getBodyRows(table);
+        let numPages = Math.ceil(tBodyRows.length / rowsPerPage);
+
+        let colCount =
+            [].slice.call(
+                table.querySelector('tr').cells
+            )
+                .reduce((a, b) => a + parseInt(b.colSpan), 0);
+
+        table
+            .createTFoot()
+            .insertRow()
+            .innerHTML = `<td colspan=${colCount}><div class="nav"></div></td>`;
+
+        if (numPages == 1)
+            return;
+
+        for (i = 0; i <numPages; i++) {
+
+            let pageNum = i + 1;
+
+            table.querySelector('.nav')
+                .insertAdjacentHTML(
+                    'beforeend',
+                    `<a href="#" rel="${i}">${pageNum}</a> `
+                );
+
+        }
+
+        changeToPage(table, 1, rowsPerPage);
+
+        for (let navA of table.querySelectorAll('.nav a'))
+            navA.addEventListener(
+                'click',
+                e => changeToPage(
+                    table,
+                    parseInt(e.target.innerHTML),
+                    rowsPerPage
+                )
+            );
+
+    }
+
+    function changeToPage(table, page, rowsPerPage) {
+
+        let startItem = (page - 1) * rowsPerPage;
+        let endItem = startItem + rowsPerPage;
+        let navAs = table.querySelectorAll('.nav a');
+        let tBodyRows = getBodyRows(table);
+
+        for (let nix = 0; nix < navAs.length; nix++) {
+
+            if (nix == page - 1)
+                navAs[nix].classList.add('active');
+            else
+                navAs[nix].classList.remove('active');
+
+            for (let trix = 0; trix < tBodyRows.length; trix++)
+                tBodyRows[trix].style.display =
+                    (trix >= startItem && trix < endItem)
+                        ? 'table-row'
+                        : 'none';
+
+        }
+
+    }
+
+    // tbody might still capture header rows if 
+    // if a thead was not created explicitly.
+    // This filters those rows out.
+    function getBodyRows(table) {
+        let initial = table.querySelectorAll('tbody tr');
+        return Array.from(initial)
+            .filter(row => row.querySelectorAll('td').length > 0);
+    }
+</script>
+
+
+
+

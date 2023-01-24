@@ -39,6 +39,12 @@ namespace EventSchedularNew.Models
             var eveRes = objEntity.getEventApprovedDetails();
             return eveRes.ToList();
         }
+
+        public int eventUpdate(int eveid,string status)
+        {
+            var upResult = objEntity.UpdateEvent(eveid, status);
+            return upResult;
+        }
             
     }
 }

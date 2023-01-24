@@ -42,6 +42,11 @@ namespace EventSchedularNew.Controllers
             var resstaff = ObjBus.Staff(plantid, unitid, deptid, empmode);
             return Json(resstaff, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult EventTable()
+        {
+            var resEvents = ObjBus.getEvents();
+            return View(resEvents);
+        }
        
 
         public JsonResult GetEvents()
@@ -108,7 +113,13 @@ namespace EventSchedularNew.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
-       
+
+        public JsonResult updateEvent(int eventID, string eventStatus)
+        {
+            var updateResult = ObjBus.eventUpdate(eventID, eventStatus);
+            return Json(updateResult, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

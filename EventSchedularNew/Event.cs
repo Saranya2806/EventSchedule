@@ -27,6 +27,6 @@ namespace EventSchedularNew
         public Nullable<int> empID { get; set; }
         public string empName { get; set; }
         public Nullable<int> RoomId { get; set; }
-
+        public string EventStatus { get; set; }
     }
 }

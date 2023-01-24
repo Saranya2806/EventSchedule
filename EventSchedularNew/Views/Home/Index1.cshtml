@@ -98,7 +98,10 @@
 }
 
 @*<h2>Online Booking</h2>*@
-<div class="col-lg-12" style="padding:1%;">
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<div class="container container1">
+
+    <div class="col-lg-12" style="padding:1%;">
 
     <span class="col-lg-2" style="font-weight:bold;">Employee ID : @ViewData["empID"]</span>
     <input type="hidden" value="@ViewData["empID"]" id="hdnEmpID" />
@@ -107,30 +110,30 @@
     <input type="hidden" value="@ViewData["roomID"]" id="hdnroomID" />
     <input type="hidden" value="@ViewData["roomName"]" id="hdnroomName" />
 </div>
-<div id="calender"></div>
+<div class="cal" id="calender"></div>
 
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><span id="eventTitle"></span></h4>
-            </div>
-            <div class="modal-body">
-                <button id="btndelete" class="btn btn-default btn-sm pull-right">
-                    <span class="glypicon glypicon-remove">Remove</span>
-                </button>
-                <button id="btnEdit" class="btn btn-default btn-sm pull-right">
-                    <span class="glypicon glypicon-pencil">Edit</span>
-                </button>
-                <p id="pDetails"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <button id="btndelete" class="btn btn-default btn-sm pull-right">
+                        <span class="glypicon glypicon-remove">Remove</span>
+                    </button>
+                    <button id="btnEdit" class="btn btn-default btn-sm pull-right">
+                        <span class="glypicon glypicon-pencil">Edit</span>
+                    </button>
+                    <p id="pDetails"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 <div id="myModalSave" class="modal fade" role="dialog">
@@ -147,61 +150,63 @@
                     <div class="form-group">
                         <div><label>Conference Hall</label></div>
                         <div><label id="lblConference" />@ViewData["roomName"]</div>
+                       
                     </div>
                     <div class="form-group" id="empDetails">
                         <div><label>Employee ID :</label><label id="lblempid"> </label></div>
                         <div><label>Employee Name :</label> <label id="lblempName"></label></div>
 
-                    </div>
-                    <div class="form-group">
-                        <span><label>Subject</label></span>
-                        <span><input type="text" id="txtSubject" class="form-control" /></span>
+                            </div>
+                            <div class="form-group">
+                                <span><label>Subject</label></span>
+                                <span><input type="text" id="txtSubject" class="form-control" /></span>
 
+                            </div>
+                            <div class="form-group">
+                                <label>Start</label>
+                                <div class="input-group date" id="dtp1">
+                                    <input type="text" id="txtStart" class="form-control" />
+                                    <span class="input-group-addon" style="width:13%;">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="chkIsFullDay" checked="checked" />Is Full Day event</label>
+                                </div>
+                            </div>
+                            <div class="form-group" id="divEndDate" style="display:none">
+                                <label>End</label>
+                                <div class="input-group date" id="dtp2">
+                                    <input type="text" id="txtEnd" class="form-control" />
+                                    <span class="input-group-addon" style="width:13%;">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id="txtDescription" rows="3" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Theme Color</label>
+                                <select id="ddThemeColor" class="form-control">
+                                    <option value="">Default</option>
+                                    <option value="red">Red</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="black">Black</option>
+                                    <option value="green">Green</option>
+                                </select>
+                            </div>
+                            <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label>Start</label>
-                        <div class="input-group date" id="dtp1">
-                            <input type="text" id="txtStart" class="form-control" />
-                            <span class="input-group-addon" style="width:13%;">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="chkIsFullDay" checked="checked" />Is Full Day event</label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="divEndDate" style="display:none">
-                        <label>End</label>
-                        <div class="input-group date" id="dtp2">
-                            <input type="text" id="txtEnd" class="form-control" />
-                            <span class="input-group-addon" style="width:13%;">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="txtDescription" rows="3" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Theme Color</label>
-                        <select id="ddThemeColor" class="form-control">
-                            <option value="">Default</option>
-                            <option value="red">Red</option>
-                            <option value="blue">Blue</option>
-                            <option value="black">Black</option>
-                            <option value="green">Green</option>
-                        </select>
-                    </div>
-                    <button type="button" id="btnSave" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -216,7 +221,17 @@
         margin-left: 0;
         font-weight: bold;
     }
+    .cal {
+        background-color: #FFF2F2;
+    }
+    .container1 {
+      border:1px solid;
+        background-size: cover;
+        padding: 10% 4%;
+        padding-bottom: 3%;
+    }
 </style>
+
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
@@ -278,7 +293,7 @@
             })
         }
         function GenerateCalender(events) {
-            
+
                 $('#calender').fullCalendar('destroy');
                 $('#calender').fullCalendar({
                     contentHeight: 400,
@@ -293,7 +308,7 @@
                     eventColor: '#378006',
                     events: events,
                     eventClick: function (calEvent, jsEvent, view) {
-                        
+
                         selectedEvent = calEvent;
                         $('#myModal #eventTitle').text(calEvent.title);
                         var $description = $('<div/>');
@@ -322,7 +337,7 @@
                     },
                     editable: true,
                     eventDrop: function (event) {
-                        
+
                         var data = {
                             id: event.eventID,
                             subject: event.title,
@@ -332,7 +347,8 @@
                             Themecolor: event.color,
                             IsFullDay: event.allDay,
                             empID: event.empID,
-                            empName: event.empName
+                            empName: event.empName,
+                            RoomId: event.RoomId
                         };
                         SaveEvent(data);
                     },
@@ -342,13 +358,15 @@
                 //Open modal dialog for edit event
                 openAddEditForm();
             });
+
         $("#btndelete").click(function () {
-            
+            debugger;
+                
                 if (selectedEvent != null && confirm("Want delete?")) {
                     $.ajax({
                         type: "POST",
                         url: "Home/DeleteEvents",
-                        data: { 'eventID': selectedEvent.eventID },
+                        data: { eventID: selectedEvent.eventID },
                         success: function (data) {
                             if (data.status) {
                                 FetchEventAndRenderCalendar();
@@ -379,7 +397,7 @@
                 }
             });
         function openAddEditForm() {
-            
+
                 if (selectedEvent != null) {
                     $('#hdEventID').val(selectedEvent.eventID);
                     $('#txtSubject').val(selectedEvent.title);
@@ -391,6 +409,7 @@
                     $('#ddThemeColor').val(selectedEvent.color);
                     $('#lblempid').text(selectedEvent.empid);
                     $('#lblempName').text(selectedEvent.empName);
+                    $('#hdnRoomID').val(selectedEvent.RoomId);
 
                     //$('#lblConference').text(selectedEvent)
                 }
@@ -405,7 +424,7 @@
             }
             $('#btnSave').click(function () {
                 //Validation/
-                
+
                 if ($('#txtSubject').val().trim() == "") {
                     alert('Subject required');
                     return;
@@ -436,14 +455,15 @@
                     ThemeColor: $('#ddThemeColor').val(),
                     IsFullDay: $('#chkIsFullDay').is(':checked'),
                     empID: $('#hdnEmpID').val(),
-                    empName: $('#hdnEmpName').val()
+                    empName: $('#hdnEmpName').val(),
+                    RoomId: $('#hdnroomID').val()
                 }
-                
+
                 SaveEvent(data);
                 // call function for submit data to the server
             });
         function SaveEvent(data) {
-            
+
                 $.ajax({
                     type: "POST",
                     url: '/home/SaveEvent',

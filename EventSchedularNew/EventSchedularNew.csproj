@@ -257,6 +257,7 @@
     <Content Include="Views\Home\Index1.cshtml" />
     <Content Include="Views\Login\UserLogin.cshtml" />
     <Content Include="Views\Home\SelectSchedule.cshtml" />
+    <Content Include="Views\Home\EventTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
