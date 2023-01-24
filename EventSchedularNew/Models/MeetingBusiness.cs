@@ -40,9 +40,17 @@ namespace EventSchedularNew.Models
             return eveRes.ToList();
         }
 
-        public int eventUpdate(int eveid,string status)
+        public int eventUpdate(string eveid,string status)
         {
-            var upResult = objEntity.UpdateEvent(eveid, status);
+            var eventAry = eveid.Split(' ');
+            var upResult = 0;
+            foreach (var item in eventAry)
+            {
+                upResult = objEntity.UpdateEvent(item, status);
+                if (upResult == 0)
+                    break;
+            }
+             
             return upResult;
         }
             

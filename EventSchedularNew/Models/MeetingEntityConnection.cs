@@ -170,14 +170,15 @@ namespace EventSchedularNew.Models
             return lstobj;
         }
 
-        public int UpdateEvent(int eventId, string status)
+        public int UpdateEvent(string eventId, string status)
         {
             int result = 0;
+            int eveID = Convert.ToInt32(eventId.ToString());
             try
             {
                 using (ConferenceHallEntities3 objUpdate = new ConferenceHallEntities3())
                 {
-                    objUpdate.Events.Where(a => a.id == eventId).ToList().ForEach(i => i.EventStatus = status);
+                    objUpdate.Events.Where(a => a.id == eveID).ToList().ForEach(i => i.EventStatus = status);
                     objUpdate.SaveChanges();
                     result = 1;
                 }

@@ -29,16 +29,10 @@
 
                         <input type="text" id="search" placeholder="Search here">
 
-
-
-
-
                         <br />
                         <br />
 
                         <table id="eventsch" class="table table-bordered text-center">
-
-
 
                             <tr class="bg-primary btn-group-sm">
                                 <th>
@@ -61,7 +55,7 @@
                             <tbody id="fixed">
                                 <tr >
 
-                                    <td><input type="checkbox" name="row-check" value="1" eventid="@item.id"></td>
+                                    <td><input type="checkbox" name="row-check" id="chk-@item.id" eventid="@item.id"></td>
                                     <td class="hidden">@item.id</td>
                                     <td>@item.EmpID</td>
                                     <td>@item.EmpName </td>
@@ -159,8 +153,8 @@
                 });
                
             }
-            var event = str.join(',');
-            iApprove(event, status);
+            var event = str.join(' ');
+            iApprove(event, "Approve");
         }
       
 
@@ -176,8 +170,10 @@
                 data: { eventID: eveid, eventStatus: eveStatus },
                 async: false,
                 success: function (result) {
-                    if (result == 1)
+                    if (result == 1) {
                         alert("Insert Successfully");
+                       
+                    }
                     else
                         alert("Not Insert");
                 },
