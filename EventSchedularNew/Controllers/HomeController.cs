@@ -44,7 +44,8 @@ namespace EventSchedularNew.Controllers
         }
         public ActionResult EventTable()
         {
-            return View();
+            var resEvents = ObjBus.getEvents();
+            return View(resEvents);
         }
        
 
@@ -112,7 +113,13 @@ namespace EventSchedularNew.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
-       
+
+        public JsonResult updateEvent(int eventID, string eventStatus)
+        {
+            var updateResult = ObjBus.eventUpdate(eventID, eventStatus);
+            return Json(updateResult, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

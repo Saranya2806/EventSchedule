@@ -150,13 +150,15 @@ namespace EventSchedularNew.Models
                               join em in objEve.EmployeeMasters on ev.empID equals em.EMPLOYEEID
                               select new Events
                               {
+                                  id=ev.id,
                                   EmpID = ev.empID,
                                   EmpName = em.EMPLOYEENAME,
                                   start_date = ev.start_date,
                                   end_date = ev.end_date,
                                   BookingHall = "Madras Board Room",
+                                  subject=ev.subject,
                                   IsFullDay = ev.IsFullDay,
-                                  Status = "Approved"
+                                  Status = ev.EventStatus
                               }).ToList();
                 }
              
@@ -167,6 +169,25 @@ namespace EventSchedularNew.Models
             }
             return lstobj;
         }
-        
+
+        public int UpdateEvent(int eventId, string status)
+        {
+            int result = 0;
+            try
+            {
+                using (ConferenceHallEntities3 objUpdate = new ConferenceHallEntities3())
+                {
+                    objUpdate.Events.Where(a => a.id == eventId).ToList().ForEach(i => i.EventStatus = status);
+                    objUpdate.SaveChanges();
+                    result = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                result = 0;
+            }
+            return result;
+        }
+
     }
 }

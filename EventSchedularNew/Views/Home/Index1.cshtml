@@ -110,7 +110,7 @@
     <input type="hidden" value="@ViewData["roomID"]" id="hdnroomID" />
     <input type="hidden" value="@ViewData["roomName"]" id="hdnroomName" />
 </div>
-<div id="calender"></div>
+<div class="cal" id="calender"></div>
 
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -150,6 +150,7 @@
                     <div class="form-group">
                         <div><label>Conference Hall</label></div>
                         <div><label id="lblConference" />@ViewData["roomName"]</div>
+                       
                     </div>
                     <div class="form-group" id="empDetails">
                         <div><label>Employee ID :</label><label id="lblempid"> </label></div>
@@ -220,16 +221,14 @@
         margin-left: 0;
         font-weight: bold;
     }
-    .cal{
-        background-color:lightblue;
+    .cal {
+        background-color: #FFF2F2;
     }
-    .container1{
-        background-color:lavender;
-        background-size:cover;
-        padding:10% 4%;
-        padding-bottom:3%;
-
-      
+    .container1 {
+      border:1px solid;
+        background-size: cover;
+        padding: 10% 4%;
+        padding-bottom: 3%;
     }
 </style>
 
@@ -294,7 +293,7 @@
             })
         }
         function GenerateCalender(events) {
-            
+
                 $('#calender').fullCalendar('destroy');
                 $('#calender').fullCalendar({
                     contentHeight: 400,
@@ -309,7 +308,7 @@
                     eventColor: '#378006',
                     events: events,
                     eventClick: function (calEvent, jsEvent, view) {
-                        
+
                         selectedEvent = calEvent;
                         $('#myModal #eventTitle').text(calEvent.title);
                         var $description = $('<div/>');
@@ -338,7 +337,7 @@
                     },
                     editable: true,
                     eventDrop: function (event) {
-                        
+
                         var data = {
                             id: event.eventID,
                             subject: event.title,
@@ -348,7 +347,8 @@
                             Themecolor: event.color,
                             IsFullDay: event.allDay,
                             empID: event.empID,
-                            empName: event.empName
+                            empName: event.empName,
+                            RoomId: event.RoomId
                         };
                         SaveEvent(data);
                     },
@@ -358,13 +358,15 @@
                 //Open modal dialog for edit event
                 openAddEditForm();
             });
+
         $("#btndelete").click(function () {
-            
+            debugger;
+                
                 if (selectedEvent != null && confirm("Want delete?")) {
                     $.ajax({
                         type: "POST",
                         url: "Home/DeleteEvents",
-                        data: { 'eventID': selectedEvent.eventID },
+                        data: { eventID: selectedEvent.eventID },
                         success: function (data) {
                             if (data.status) {
                                 FetchEventAndRenderCalendar();
@@ -395,7 +397,7 @@
                 }
             });
         function openAddEditForm() {
-            
+
                 if (selectedEvent != null) {
                     $('#hdEventID').val(selectedEvent.eventID);
                     $('#txtSubject').val(selectedEvent.title);
@@ -407,6 +409,7 @@
                     $('#ddThemeColor').val(selectedEvent.color);
                     $('#lblempid').text(selectedEvent.empid);
                     $('#lblempName').text(selectedEvent.empName);
+                    $('#hdnRoomID').val(selectedEvent.RoomId);
 
                     //$('#lblConference').text(selectedEvent)
                 }
@@ -421,7 +424,7 @@
             }
             $('#btnSave').click(function () {
                 //Validation/
-                
+
                 if ($('#txtSubject').val().trim() == "") {
                     alert('Subject required');
                     return;
@@ -452,14 +455,15 @@
                     ThemeColor: $('#ddThemeColor').val(),
                     IsFullDay: $('#chkIsFullDay').is(':checked'),
                     empID: $('#hdnEmpID').val(),
-                    empName: $('#hdnEmpName').val()
+                    empName: $('#hdnEmpName').val(),
+                    RoomId: $('#hdnroomID').val()
                 }
-                
+
                 SaveEvent(data);
                 // call function for submit data to the server
             });
         function SaveEvent(data) {
-            
+
                 $.ajax({
                     type: "POST",
                     url: '/home/SaveEvent',
