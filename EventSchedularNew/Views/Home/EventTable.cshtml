@@ -36,7 +36,7 @@
                         <br />
                         <br />
 
-                        <table id="eventsch" class="table table-bordered text-center">
+                        <table id="eventsch" class="table table-bordered text-left" style="text-align:center;font-size:95%">
 
 
 
@@ -91,7 +91,7 @@
                             </tbody>
                                 }
                         </table>
-                        <button type="button" class="btn btn-success" id="btnapprove" onclick="Approve()">Approve</button>
+                        <button type="button" class="btn btn-success" style="margin-left:50%" id="btnapprove" onclick="Approve()">Approve</button>
                     </div>    
                 </div>
             </div>
@@ -110,7 +110,10 @@
         border-color: #004d7b;
         margin-right: 22%;
         margin-left:1%;
-        margin-bottom: 20%
+        margin-bottom:10%;
+        margin-top:10%;
+        
+        
     }
             body {
                 background-color:white;
@@ -284,7 +287,7 @@
         }
    
    
-        addPagerToTables('#eventsch', 10);
+        addPagerToTables('#eventsch', 5);
 
     function addPagerToTables(tables, rowsPerPage = 1) {
 
@@ -298,7 +301,7 @@
 
     }
 
-    function addPagerToTable(table, rowsPerPage = 10) {
+    function addPagerToTable(table, rowsPerPage = 5) {
 
         let tBodyRows = getBodyRows(table);
         let numPages = Math.ceil(tBodyRows.length / rowsPerPage);
