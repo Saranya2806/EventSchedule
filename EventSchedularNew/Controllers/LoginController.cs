@@ -20,23 +20,30 @@ namespace EventSchedularNew.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var res = objBus.Login(mtl);
-                //if (res != null)
-                //{
+                var res = objBus.Login(mtl);
+                if (res != null)
+                {
 
-                //    if (mtl.UserID == res.UserID)
-                //    {
-                //        if (mtl.PassWord == res.PassWord)
-                //        {
-                //            return RedirectToAction("SelectSchedule", "Home");
-                //        }
-                //    }
-                //}
-                return RedirectToAction("SelectSchedule", "Home");
+                    if (mtl.UserID == res.UserID)
+                    {
+                        if (mtl.PassWord == res.PassWord)
+                            TempData["msg"] = "Valid";
+                        else
+                            TempData["msg"] = "Password Invalid.";
+                    }
+                    else
+                        TempData["msg"] = "UserName Invalid.";
+                }
+                else
+                    TempData["msg"] = "UserName or Password Invalid.";
             }
             else
+                TempData["msg"] = "UserName or Password Invalid.";
+
+            if (TempData["msg"].ToString() == "Valid")
+                return RedirectToAction("SelectSchedule", "Home");
+            else
                 return RedirectToAction("UserLogin");
-            
         }
         public ActionResult logOut ()
         {
