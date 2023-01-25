@@ -114,7 +114,7 @@ namespace EventSchedularNew.Controllers
             return new JsonResult { Data = new { status = status } };
         }
 
-        public JsonResult updateEvent(int eventID, string eventStatus)
+        public JsonResult updateEvent(string eventID, string eventStatus)
         {
             var updateResult = ObjBus.eventUpdate(eventID, eventStatus);
             return Json(updateResult, JsonRequestBehavior.AllowGet);

@@ -22,47 +22,54 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <input type="text" id="search" placeholder="Search here">
-                        <br />
-                        <br />
-                        <div class="fixTableHead" style="text-align:center;height:309px;overflow:auto;" id="Selectdept">
-                            <table id="eventsch" class="table table-bordered table-responsive " style="text-align:center;font-size:95%">
-                                <thead>
-                                    <tr class="bg-primary btn-group-sm">
-                                        <th>
-                                            <input id="check_all" type="checkbox">
-                                        </th>
-                                        <th onclick="sortTable(0)" class="text-center hidden">ID</th>
-                                        <th onclick="sortTable(1)" class="text-center">Employee ID</th>
-                                        <th onclick="sortTable(2)" class="text-center">Name</th>
-                                        <th onclick="sortTable(3)" class="text-center"> Hall </th>
-                                        <th onclick="sortTable(4)" class="text-center"> Start Time</th>
-                                        <th onclick="sortTable(5)" class="text-center"> End Time</th>
-                                        <th onclick="sortTable(6)" class="text-center">Subject</th>
-                                        <th onclick="sortTable(7)" class="text-center">Status</th>
-                                        <th class="text-center"> Action</th>
-                                    </tr>
-                                </thead>
-                                @foreach (var item in Model)
-                                {
-                                    <tbody id="fixed">
-                                        <tr>
 
-                                            <td><input type="checkbox" name="row-check" value="1" eventid="@item.id"></td>
-                                            <td class="hidden">@item.id</td>
-                                            <td>@item.EmpID</td>
-                                            <td>@item.EmpName </td>
-                                            <td>@item.BookingHall </td>
-                                            <td>@item.start_date</td>
-                                            <td>@item.end_date</td>
-                                            <td>@item.subject</td>
-                                            <td>@item.Status</td>
-                                            <td>
-                                                <span>
-                                                    <i class="w3-large fa fa-check-square " tool-tip-toggle="tooltip-demo" data-original-title="Approve" onclick="iApprove(@item.id,'Approve')" style="color:green;"></i>
-                                                </span>
-                                                <span>
-                                                    <i class="w3-large fa fa-pause-circle" tool-tip-toggle="tooltip-demo" data-original-title="Hold" onclick="iApprove(@item.id,'Hold')" style="color:blue;"></i>
-                                                </span>
+                        <br />
+                        <br />
+
+                        <table id="eventsch" class="table table-bordered text-left" style="text-align:center;font-size:95%">
+
+                            <tr class="bg-primary btn-group-sm">
+                                <th>
+                                    <input id="check_all" type="checkbox">
+                                </th>
+                                <th onclick="sortTable(0)" class="text-center hidden">ID</th>
+                                <th onclick="sortTable(1)" class="text-center">Employee ID</th>
+                                <th onclick="sortTable(2)" class="text-center">Name</th>
+                                <th onclick="sortTable(3)" class="text-center"> Hall </th>
+                                <th onclick="sortTable(4)" class="text-center"> Start Time</th>
+                                <th onclick="sortTable(5)" class="text-center"> End Time</th>
+                                <th onclick="sortTable(6)" class="text-center">Subject</th>
+                                <th onclick="sortTable(7)" class="text-center">Status</th>
+                                <th class="text-center"> Action</th>
+
+
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                            <tbody id="fixed">
+                                <tr >
+
+                                    <td><input type="checkbox" name="row-check" id="chk-@item.id" eventid="@item.id"></td>
+                                    <td class="hidden">@item.id</td>
+                                    <td>@item.EmpID</td>
+                                    <td>@item.EmpName </td>
+                                    <td>@item.BookingHall </td>
+                                    <td>@item.start_date</td>
+                                    <td>@item.end_date</td>
+                                    <td>@item.subject</td>
+                                    <td>@item.Status</td>
+                                    <td>
+                                        @*<a href=' #'>
+
+                        </a>*@
+
+
+                                        <span>
+                                            <i class="w3-large fa fa-check-square " onclick="iApprove(@item.id,'Approve')" style="color:green;"></i>
+                                        </span>
+                                        <span>
+                                            <i class="w3-large fa fa-pause-circle" onclick="iApprove(@item.id,'Hold')" style="color:blue;"></i>
+                                        </span>
 
                                                 <span>
                                                     <i class="w3-large fa fa-remove" tool-tip-toggle="tooltip-demo" data-original-title="Reject" onclick="iApprove(@item.id,'Reject')" style="color:red;"></i>
@@ -146,8 +153,8 @@
                 });
                
             }
-            var event = str.join(',');
-            iApprove(event, status);
+            var event = str.join(' ');
+            iApprove(event, "Approve");
         }
         function iApprove(eventId, status) {
             debugger;
@@ -159,8 +166,10 @@
                 data: { eventID: eveid, eventStatus: eveStatus },
                 async: false,
                 success: function (result) {
-                    if (result == 1)
+                    if (result == 1) {
                         alert("Insert Successfully");
+                       
+                    }
                     else
                         alert("Not Insert");
                 },
