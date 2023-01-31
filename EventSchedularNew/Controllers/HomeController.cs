@@ -11,7 +11,7 @@ namespace EventSchedularNew.Controllers
     {
         MeetingBusiness ObjBus = new MeetingBusiness();
         // GET: Home
-        public ActionResult Index1(int empid, string EmpName, string RoomID, string RoomName)
+        public ActionResult Calender(int empid, string EmpName, string RoomID, string RoomName)
         {
             ViewData["empId"] = empid;
             ViewData["empName"] = EmpName;
@@ -24,7 +24,7 @@ namespace EventSchedularNew.Controllers
             
             var res = new MeetingLogin();
             res.SelectPlant = ObjBus.Plant();
-            res.SelectPlant.Add(new SelectListItem() { Value = "0", Text = "--Select--" });
+            //res.SelectPlant.Add(new SelectListItem() { Value = "0", Text = "--Select--" });
             return View(res);
         }
         public JsonResult SELUnit(int plantID)

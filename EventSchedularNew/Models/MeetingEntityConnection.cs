@@ -13,7 +13,7 @@ namespace EventSchedularNew.Models
         {
             MeetingLogin objmt = new MeetingLogin();
             try
-            {
+            {   
                 using (ConferenceHallEntities3 objcom = new ConferenceHallEntities3())
                 {
 
@@ -36,7 +36,7 @@ namespace EventSchedularNew.Models
             {
                 using (ConferenceHallEntities3 objsel = new ConferenceHallEntities3())
                 {
-                    obj = objsel.PlantMasters.Select(a => new SelectListItem { Text = a.PlantName, Value = a.PlantID.ToString() }).ToList();
+                    obj = objsel.PlantMasters.Select(a => new SelectListItem { Text = a.PlantName, Value = a.PlantID.ToString() }).ToList();                  
                 }
             }
             catch (Exception e)
@@ -54,7 +54,7 @@ namespace EventSchedularNew.Models
                 {
                    
                     obj = objUni.UnitMasters.Where(a => a.PlantID == plantID).Select(e => new SelectListItem { Text = e.UnitName, Value = e.UnitID.ToString() }).ToList();
-                    obj.Insert(0, new SelectListItem { Value = "0",Text="--Select--" });
+                   obj.Insert(0, new SelectListItem { Value = "0",Text="--Select--" });
 
                 }
             }
@@ -83,9 +83,7 @@ namespace EventSchedularNew.Models
                            select new SelectListItem
                            {
                                Value=dm.DepartmentID.ToString(),
-                               Text=dm.DepartmentName
-                              
-
+                               Text=dm.DepartmentName                          
                            }).ToList();
                     obj.Insert(0, new SelectListItem { Value = "0", Text = "--Select--" });
                 }
@@ -185,6 +183,7 @@ namespace EventSchedularNew.Models
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message.ToString());
                 result = 0;
             }
             return result;

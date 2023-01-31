@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="ConferenceHallModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ConferenceHallModel.Event" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ConferenceHallModel.EventsData" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConferenceHallModel.EventsScheduler" Width="1.5" PointX="2.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConferenceHallModel.EventsScheduler" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ConferenceHallModel.ConferenceRoomMaster" Width="1.375" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ConferenceHallModel.NewEventsData" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ConferenceHallModel.PlantMaster" Width="1.5" PointX="10.25" PointY="3.125" />

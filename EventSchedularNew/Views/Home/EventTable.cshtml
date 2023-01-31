@@ -1,33 +1,32 @@
 ﻿@model List<EventSchedularNew.Models.Events>
 
-    @{
-        ViewBag.Title = "EventTable";
-    }
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+@{
+    ViewBag.Title = "EventTable";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
-    <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-            <div class="container1">
-                <h1 class="text-center text-primary"> <u>Employee Details</u></h1>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container1">
+        <h1 class="text-center text-primary"> <u>Employee Details</u></h1>
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <input type="text" id="search" placeholder="Search here">
-
-                        <br />
-                        <br />
-
-                        <table id="eventsch" class="table table-bordered text-left" style="text-align:center;font-size:95%">
-
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="text" id="search" placeholder="Search here">
+                <br />
+                <br />
+                <div class="fixTableHead" style="text-align:center;height:309px;overflow:auto;" id="Selectdept">
+                    <table id="eventsch" class="table table-bordered table-responsive " style="text-align:center;font-size:95%">
+                        <thead>
                             <tr class="bg-primary btn-group-sm">
                                 <th>
                                     <input id="check_all" type="checkbox">
@@ -41,15 +40,14 @@
                                 <th onclick="sortTable(6)" class="text-center">Subject</th>
                                 <th onclick="sortTable(7)" class="text-center">Status</th>
                                 <th class="text-center"> Action</th>
-
-
                             </tr>
-                            @foreach (var item in Model)
-                            {
+                        </thead>
+                        @foreach (var item in Model)
+                        {
                             <tbody id="fixed">
-                                <tr >
+                                <tr>
 
-                                    <td><input type="checkbox" name="row-check" id="chk-@item.id" eventid="@item.id"></td>
+                                    <td><input type="checkbox" name="row-check" value="1" eventid="@item.id"></td>
                                     <td class="hidden">@item.id</td>
                                     <td>@item.EmpID</td>
                                     <td>@item.EmpName </td>
@@ -59,48 +57,44 @@
                                     <td>@item.subject</td>
                                     <td>@item.Status</td>
                                     <td>
-                                        @*<a href=' #'>
-
-                        </a>*@
-
-
                                         <span>
-                                            <i class="w3-large fa fa-check-square " onclick="iApprove(@item.id,'Approve')" style="color:green;"></i>
+                                            <i class="w3-large fa fa-check-square " tool-tip-toggle="tooltip-demo" data-original-title="Approve" onclick="iApprove(@item.id,'Approve')" style="color:green;"></i>
                                         </span>
                                         <span>
-                                            <i class="w3-large fa fa-pause-circle" onclick="iApprove(@item.id,'Hold')" style="color:blue;"></i>
+                                            <i class="w3-large fa fa-pause-circle" tool-tip-toggle="tooltip-demo" data-original-title="Hold" onclick="iApprove(@item.id,'Hold')" style="color:blue;"></i>
                                         </span>
 
-                                                <span>
-                                                    <i class="w3-large fa fa-remove" tool-tip-toggle="tooltip-demo" data-original-title="Reject" onclick="iApprove(@item.id,'Reject')" style="color:red;"></i>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                }
-                            </table>
+                                        <span>
+                                            <i class="w3-large fa fa-remove" tool-tip-toggle="tooltip-demo" data-original-title="Reject" onclick="iApprove(@item.id,'Reject')" style="color:red;"></i>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
 
-                        </div>
-                        <br />
-                        <br />
-                        <button type="button" class="btn btn-success" tool-tip-toggle="tooltip-demo" data-original-title="Approve all" style="margin-left:90%" id="btnapprove" onclick="Approve()">Approve</button>
-                    </div>
                 </div>
+                <br />
+                <br />
+                <button type="button" class="btn btn-success" tool-tip-toggle="tooltip-demo" data-original-title="Approve all" style="margin-left:90%" id="btnapprove" onclick="Approve()">Approve</button>
             </div>
-    </body>
-    </html>
+        </div>
+    </div>
+</body>
+</html>
 <style>
     .container1 {
         border: 1px solid;
         padding: 1%;
         margin: 5%;
-        width:100%;
+        width: 100%;
         border-color: #004d7b;
         margin-right: 22%;
-        margin-left:1%;
-        margin-bottom:10%;
-        margin-top:10%;  
+        margin-left: 1%;
+        margin-bottom: 10%;
+        margin-top: 10%;
     }
+
     .fixTableHead {
         overflow-y: auto;
         height: 110px;
@@ -126,137 +120,140 @@
         padding: 8px;
     }
 </style>
-    <script>
-        var $rows = $('#fixed tr');
-        $('#search').keyup(function () {
+<script>
+   
+    var $rows = $('#fixed tr');
+    $('#search').keyup(function () {
 
-            var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
-                reg = RegExp(val, 'i'),
-                text;
+        var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+            reg = RegExp(val, 'i'),
+            text;
 
-            $rows.show().filter(function () {
-                text = $(this).text().replace(/\s+/g, ' ');
-                return !reg.test(text);
-            }).hide();
-        });
-        function Approve() {
-            debugger;
-            var str = new Array();
-            if ($('#eventsch').find('input[type=checkbox]:checked').length > 0) {
-                $('#eventsch').find('input[type=checkbox]:checked').each(function (index) {
-                    if ($('#check_all').is(':checked')) {
-                        if (index != 0)
-                            str.push($(this).attr('eventid'));
-                    }
-                    else
+        $rows.show().filter(function () {
+            text = $(this).text().replace(/\s+/g, ' ');
+            return !reg.test(text);
+        }).hide();
+    });
+    function Approve() {
+        debugger;
+        var str = new Array();
+        if ($('#eventsch').find('input[type=checkbox]:checked').length > 0) {
+            $('#eventsch').find('input[type=checkbox]:checked').each(function (index) {
+                if ($('#check_all').is(':checked')) {
+                    if (index != 0)
                         str.push($(this).attr('eventid'));
-                });
-               
-            }
-            var event = str.join(' ');
-            iApprove(event, "Approve");
-        }
-        function iApprove(eventId, status) {
-            debugger;
-            var eveid = eventId.toString();
-            var eveStatus = status;
-            $.ajax({
-                url: '/Home/updateEvent',
-                dataType: 'json',
-                data: { eventID: eveid, eventStatus: eveStatus },
-                async: false,
-                success: function (result) {
-                    if (result == 1) {
-                        alert("Insert Successfully");
-                       
-                    }
-                    else
-                        alert("Not Insert");
-                },
-                error: function (result) {
-                    alert(result);
-                },
-            });
-        }
-        function deleteRow(r) {
-            var i = r.parentNode.parentNode.rowIndex;
-            document.getElementById("table").deleteRow(i);
-        }
-        $(function () {
-            $("#check_all").on("click", function () {
-                if ($("input:checkbox").prop("checked")) {
-                    $("input:checkbox[name='row-check']").prop("checked", true);
-                } else {
-                    $("input:checkbox[name='row-check']").prop("checked", false);
                 }
+                else
+                    str.push($(this).attr('eventid'));
             });
-            $("input:checkbox[name='row-check']").on("change", function () {
-                var total_check_boxes = $("input:checkbox[name='row-check']").length;
-                var total_checked_boxes = $("input:checkbox[name='row-check']:checked").length;
-                if (total_check_boxes === total_checked_boxes) {
-                    $("#check_all").prop("checked", true);
+
+        }
+        var event = str.join(' ');       
+        iApprove(event, "Approve");
+    }
+    function iApprove(eventId, status) {
+        debugger;
+        var eveid = eventId.toString();
+        var eveStatus = status;
+        $.ajax({
+            url: '/Home/updateEvent',
+            dataType: 'json',
+            data: { eventID: eveid, eventStatus: eveStatus },
+            async: false,
+            success: function (result) {
+                if (result == 1) {
+                    alert("Insert Successfully");
+                    window.location.href = '/Home/EventTable';
                 }
-                else {
-                    $("#check_all").prop("checked", false);
-                }
-            });
+
+                else 
+                    alert("Not Insert");
+            },
+            error: function (result) {
+                alert(result);
+            },
         });
-        function sortTable(n) {
-            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            table = document.getElementById("eventsch");
-            switching = true;
-            dir = "asc";
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
-                    x = rows[i].getElementsByTagName("TD")[n];
-                    y = rows[i + 1].getElementsByTagName("TD")[n];
-                    if (dir == "asc") {
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else if (dir == "desc") {
-                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
+    }
+    function deleteRow(r) {
+        var i = r.parentNode.parentNode.rowIndex;
+        document.getElementById("table").deleteRow(i);
+    }
+    $(function () {
+        $("#check_all").on("click", function () {
+            if ($("input:checkbox").prop("checked")) {
+                $("input:checkbox[name='row-check']").prop("checked", true);
+            } else {
+                $("input:checkbox[name='row-check']").prop("checked", false);
+            }
+        });
+        $("input:checkbox[name='row-check']").on("change", function () {
+            var total_check_boxes = $("input:checkbox[name='row-check']").length;
+            var total_checked_boxes = $("input:checkbox[name='row-check']:checked").length;
+            if (total_check_boxes === total_checked_boxes) {
+                $("#check_all").prop("checked", true);
+            }
+            else {
+                $("#check_all").prop("checked", false);
+            }
+        });
+    });
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("eventsch");
+        switching = true;
+        dir = "asc";
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
                     }
                 }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
                     switching = true;
-                    switchcount++;
-                } else {
-                    if (switchcount == 0 && dir == "asc") {
-                        dir = "desc";
-                        switching = true;
-                    }
                 }
             }
         }
-     type="text/javascript"
-        $(document).ready(function () {
-            $('[tool-tip-toggle="tooltip-demo"]').tooltip({
-                placement: 'top'
-            });
+    }
+    type = "text/javascript"
+    $(document).ready(function () {
+        $('[tool-tip-toggle="tooltip-demo"]').tooltip({
+            placement: 'top'
         });
-        $(document).ready(function () {
-            $("a").on('click', function (event) {
-                if (this.hash !== "") {
-                    event.preventDefault();
-                    var hash = this.hash;
-                    $('html, body').animate({
-                        scrollTop: $(hash).offset().top
-                    }, 800, function () {
-                        window.location.hash = hash;
-                    });
-                }
-            });
+    });
+
+    $(document).ready(function () {
+        $("a").on('click', function (event) {
+            if (this.hash !== "") {
+                event.preventDefault();
+                var hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800, function () {
+                    window.location.hash = hash;
+                });
+            } // End if
         });
-    </script>
+    });
+</script>
 
 
 
