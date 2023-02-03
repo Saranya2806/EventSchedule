@@ -24,7 +24,8 @@ namespace EventSchedularNew.Controllers
             
             var res = new MeetingLogin();
             res.SelectPlant = ObjBus.Plant();
-            //res.SelectPlant.Add(new SelectListItem() { Value = "0", Text = "--Select--" });
+            //res.SelectPlant.Insert(new SelectListItem() { Value = "0", Text = "--Select--" });
+            res.SelectPlant.Insert(0, new SelectListItem { Value = "0", Text = "--Select" });
             return View(res);
         }
         public JsonResult SELUnit(int plantID)

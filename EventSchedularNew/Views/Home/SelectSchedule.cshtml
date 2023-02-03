@@ -75,7 +75,9 @@
 </html>
 
 <script>
-    
+    $(function () {
+        $('#ddlplantname').val(0);
+    });
     $('#ddlplantname').on('change', function () {       
             newdata();
         });
@@ -186,7 +188,7 @@
             //var roomId = $('#ddlRoom').val();
             //var roomName = $('#ddlRoom option:selected').text();
             //window.location.href = '/Home/Index1?employeeId=' + empId + '&employeeNme=' + empName + '&roomID=' + roomId + '&roomName=' + roomName ;
-            window.location.href = '/Home/Index1?' + p;
+            window.location.href = '/Home/Calender?' + p;
         }
     }
 
