@@ -11,14 +11,26 @@ namespace EventSchedularNew.Controllers
     {
         MeetingBusiness ObjBus = new MeetingBusiness();
         // GET: Home
-        public ActionResult Calender(int empid, string EmpName, string RoomID, string RoomName)
+        public ActionResult Calender(int empid=0, string EmpName="", string RoomID="", string RoomName="")
         {
-            ViewData["empId"] = empid;
-            ViewData["empName"] = EmpName;
-            ViewData["roomID"] = RoomID;
-            ViewData["roomName"] = RoomName;
-            return View();
+            if (empid != 0)
+            {
+                ViewData["empId"] = empid;
+                ViewData["empName"] = EmpName;
+                ViewData["roomID"] = RoomID;
+                ViewData["roomName"] = RoomName;
+            }
+            else if(empid==0)
+            {
+                ViewData["empId"] = Session["UserID"].ToString();
+                ViewData["empName"] = Session["EmpName"].ToString();
+
+            }
+
+              return View();
+            
         }
+
         public ActionResult SelectSchedule()
         {
             

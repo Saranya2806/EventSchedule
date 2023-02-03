@@ -24,6 +24,7 @@ namespace EventSchedularNew.Models
         public string UnitName { get; set; }
         public int DeptID { get; set; }
         public string DeptName { get; set; }
+        public string EmpName { get; set; }
              
             public List<SelectListItem> SelectPlant { get; set; }
 
