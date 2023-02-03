@@ -18,7 +18,15 @@ namespace EventSchedularNew.Models
                 {
 
                     objmt = objcom.UserLogins.Where(a => a.EmployeeUserID == mt.UserID && a.LoginPassword == mt.PassWord)
-                        .Select(e => new MeetingLogin { UserID = e.EmployeeUserID, PassWord = e.LoginPassword }).FirstOrDefault();
+                        .Join(objcom.EmployeeMasters, u => u.EmployeeUserID, e => e.EMPLOYEEID, (UId, EID) =>
+                           new  MeetingLogin
+                           {
+                              UserID=UId.EmployeeUserID,
+                              PassWord=UId.LoginPassword,
+                              EmpName=EID.EMPLOYEENAME
+                           }).FirstOrDefault();
+                        //.
+                        //.Select(e => new MeetingLogin { UserID = e.EmployeeUserID, PassWord = e.LoginPassword,EmpName=}).FirstOrDefault();
                 }
             }
 

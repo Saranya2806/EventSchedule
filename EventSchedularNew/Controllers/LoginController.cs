@@ -29,8 +29,10 @@ namespace EventSchedularNew.Controllers
 
                     if (mtl.UserID == res.UserID)
                     {
-                        if (mtl.PassWord == res.PassWord)
-                            TempData["msg"] = "Valid";
+                        if (mtl.PassWord == res.PassWord) {
+                            Session["UserID"] = res.UserID.ToString();
+                            Session["EmpName"] = res.EmpName.ToString();
+                            TempData["msg"] = "Valid"; }
                         else
                             TempData["msg"] = "Password Invalid.";
                     }
