@@ -20,6 +20,7 @@ namespace EventSchedularNew.Models
         public int? EmpID { get; set; }
         public string EmpName { get; set; }
         public string BookingHall { get; set; }
+        public int? RoomID { get; set; }
         public string Status { get; set; }
     }
 }

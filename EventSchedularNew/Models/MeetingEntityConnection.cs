@@ -146,6 +146,7 @@ namespace EventSchedularNew.Models
                 {
                     lstobj = (from ev in objEve.Events
                               join em in objEve.EmployeeMasters on ev.empID equals em.EMPLOYEEID
+                              join cm in objEve.ConferenceRoomMasters on ev.RoomId equals cm.RoomID
                               select new Events
                               {
                                   id=ev.id,
@@ -153,7 +154,8 @@ namespace EventSchedularNew.Models
                                   EmpName = em.EMPLOYEENAME,
                                   start_date = ev.start_date,
                                   end_date = ev.end_date,
-                                  BookingHall = "Madras Board Room",
+                                  RoomID=ev.RoomId,
+                                  BookingHall = cm.RoomName,
                                   subject=ev.subject,
                                   IsFullDay = ev.IsFullDay,
                                   Status = ev.EventStatus
