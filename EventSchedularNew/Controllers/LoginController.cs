@@ -13,7 +13,10 @@ namespace EventSchedularNew.Controllers
         MeetingBusiness objBus = new MeetingBusiness();
         public ActionResult UserLogin()
         {
-            return View();
+            MeetingLogin obj = new MeetingLogin();
+            //obj.UserID = 0;
+            //obj.PassWord = string.Empty;
+            return View(obj);
         }
         [HttpPost]
         public ActionResult UserLogin(MeetingLogin mtl)
